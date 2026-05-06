@@ -219,3 +219,5 @@ __marimo__/
 /Scraper/output
 .idea/
 /Scraper/error_logs/
+Scraper/.env
+/Scraper/alembic.ini

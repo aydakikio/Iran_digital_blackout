@@ -1,1 +1,0 @@
-#claculates the delay
