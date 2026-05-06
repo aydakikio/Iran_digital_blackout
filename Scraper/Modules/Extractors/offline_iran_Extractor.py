@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 #modules
 from Scraper.Models.Experience_offline_iran import Experience_Data
 
+
 class offline_iran_extractor:
     @staticmethod
     def extract_experiences(webpage_content:BeautifulSoup, scroll_numbers):
