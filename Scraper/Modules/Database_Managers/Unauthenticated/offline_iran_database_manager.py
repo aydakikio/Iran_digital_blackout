@@ -1,5 +1,5 @@
 #Modules
-from Scraper.Models.Experience_offline_iran import Experience_Data
+from Scraper.Models.Data_Holder.Experience_offline_iran import Experience_Data
 
 #Libararies
 import jdatetime

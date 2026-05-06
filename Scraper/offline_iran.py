@@ -3,16 +3,12 @@
 
 #Libararies
 from botasaurus.browser import browser, Driver
-from botasaurus.soupify import soupify
 from botasaurus_driver.solve_cloudflare_captcha import bypass_if_detected
-from bs4 import BeautifulSoup
 from collections import deque
 
 #Modules
-from Scraper.Modules.Extractors.offline_iran_Extractor import offline_iran_extractor
 from Scraper.Modules.Interactors.offline_iran_Interactor import offline_iran_interactor
-from Scraper.Modules.Database_Managers.Unauthenticated.offline_iran_database_manager import database_manger
-from Scraper.Models.Experience_offline_iran import Experience_Data
+from Scraper.Models.Data_Holder.Experience_offline_iran import Experience_Data
 
 #global variables
 scrolls:int = 0
@@ -20,7 +16,7 @@ is_reached_end =False
 pending_experiences: deque[Experience_Data] = deque()
 
 
-#CREATE A TASK SCHEDULE FOR FINISHING THE 
+#CREATE A TASK SCHEDULE FOR FINISHING THE
 @browser(cache=False, reuse_driver=True)
 def offline_iran_scraper(driver:Driver, data=None) -> int:
     global scrolls
