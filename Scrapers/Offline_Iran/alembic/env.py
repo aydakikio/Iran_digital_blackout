@@ -9,7 +9,7 @@ import sys
 
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-from Scraper.Offline_Iran.Models import Base
+from Scrapers.Offline_Iran.Models.schema_template import Base
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

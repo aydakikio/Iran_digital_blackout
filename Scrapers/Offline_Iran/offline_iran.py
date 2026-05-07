@@ -7,8 +7,9 @@ from botasaurus_driver.solve_cloudflare_captcha import bypass_if_detected
 from collections import deque
 
 #Modules
-from Scraper.Offline_Iran.Modules.Interactor import offline_iran_interactor
-from Scraper.Offline_Iran.Models.Experience_offline_iran import Experience_Data
+from Scrapers.Offline_Iran.Modules.Interactor import offline_iran_interactor
+from Scrapers.Offline_Iran.Models.Experience_offline_iran import Experience_Data
+from Scrapers.Offline_Iran.Modules.database_manager import database_manger
 
 #global variables
 scrolls:int = 0
@@ -36,11 +37,18 @@ def offline_iran_scraper(driver:Driver, data=None) -> int:
 
     #offline_iran_extractor.extract_experiences(webpage_content , scrolls )
     #offline_iran_interactor.scroll_for_new_comments(driver) -> works
-
-    scrolls+=1
+    #scrolls+=1
 
     driver.prompt("wwwaaaaaiiiitttt")
     return 0
 
 if __name__ == '__main__':
-    offline_iran_scraper()
+    #offline_iran_scraper()
+    test_data = Experience_Data(
+        sender_name="ناشناس، دانش‌آموز",
+        experience_text="قطع اینترنت سبب شد من (و خیلی‌های دیگه) به عنوان مخالف جنگ و حمله خارجی نتونیم صدامون رو بلند کنیم.",
+        published_date="۱۶ اردیبهشت ۱۴۰۵"
+    )
+
+    database_manger.insert_experience(test_data)
+
