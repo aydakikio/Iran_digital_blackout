@@ -1,7 +1,0 @@
-beautifulsoup4==4.14.3
-botasaurus==4.0.97
-botasaurus_driver==4.0.92
-jdatetime==5.2.0
-python-dotenv==1.2.2
-Scrapers==1.35
-SQLAlchemy==2.0.45
