@@ -1,1 +1,0 @@
-#For websites that have authentication like zoomit or digiato

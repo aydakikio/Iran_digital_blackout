@@ -216,8 +216,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
-/Scraper/output
+/Scrapers/Offline_Iran/output
 .idea/
-/Scraper/error_logs/
-Scraper/.env
-/Scraper/alembic.ini
+/Scrapers/Offline_Iran/error_logs/
+Scrapers/Offline_Iran/.env
+/Scrapers/Offline_Iran/alembic.ini

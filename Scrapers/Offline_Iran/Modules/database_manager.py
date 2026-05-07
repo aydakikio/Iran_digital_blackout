@@ -1,12 +1,12 @@
 #Modules
-from Scraper.Models.Data_Holder.Experience_offline_iran import Experience_Data
+from Scraper.Offline_Iran.Models.Experience_offline_iran import Experience_Data
 
 #Libararies
 import jdatetime
 import datetime
 
-
 class database_manger:
+
     @staticmethod
     def parse_jalali_date(date_string: str) -> datetime:
         jalali_date = jdatetime.datetime.strptime(date_string, '%d %B %Y')

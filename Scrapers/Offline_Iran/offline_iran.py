@@ -7,8 +7,8 @@ from botasaurus_driver.solve_cloudflare_captcha import bypass_if_detected
 from collections import deque
 
 #Modules
-from Scraper.Modules.Interactors.offline_iran_Interactor import offline_iran_interactor
-from Scraper.Models.Data_Holder.Experience_offline_iran import Experience_Data
+from Scraper.Offline_Iran.Modules.Interactor import offline_iran_interactor
+from Scraper.Offline_Iran.Models.Experience_offline_iran import Experience_Data
 
 #global variables
 scrolls:int = 0
