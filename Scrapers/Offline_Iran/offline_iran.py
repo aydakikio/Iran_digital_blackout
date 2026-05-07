@@ -7,6 +7,7 @@ from botasaurus_driver.solve_cloudflare_captcha import bypass_if_detected
 from botasaurus.soupify import soupify
 from bs4 import BeautifulSoup
 from collections import deque
+import datetime
 
 #Modules
 from Scrapers.Offline_Iran.Modules.Extractor import offline_iran_extractor
@@ -17,7 +18,7 @@ from Scrapers.Offline_Iran.Modules.database_manager import database_manger
 #global variables
 scrolls:int = 0
 
-target_date:str = "۸ اسفند ۱۴۰۴"
+target_date:datetime = datetime.datetime(2026, 2, 27)
 pending_experiences: deque[Experience_Data] = deque()
 
 @browser(cache=False, reuse_driver=True)
@@ -46,7 +47,7 @@ def offline_iran_scraper(driver:Driver, data=None) -> int:
         #Store all of extracted data
         while pending_experiences:
             experience=pending_experiences.popleft()
-            if experience.published_date == target_date:
+            if experience.published_date <= target_date:
                 is_finished =True
                 break
 

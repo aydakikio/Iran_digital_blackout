@@ -1,6 +1,8 @@
 #Libararies
 from bs4 import BeautifulSoup
 from collections import deque
+import jdatetime
+import datetime
 
 #modules
 from Scrapers.Offline_Iran.Models.Experience_offline_iran import Experience_Data
@@ -48,9 +50,13 @@ class offline_iran_extractor:
                 name_spans = span_tags[:-1]
                 experience_data.sender_name = ' '.join(span.get_text(strip=True) for span in name_spans)
 
-                experience_data.published_date = span_tags[-1].get_text(strip=True).lstrip('، ')
-
+                experience_data.published_date = offline_iran_extractor.parse_jalali_date(span_tags[-1].get_text(strip=True).lstrip('، '))
 
 
 
             pending_experiences.append(experience_data)
+
+    @staticmethod
+    def parse_jalali_date(date_string: str) -> datetime:
+        jalali_date = jdatetime.datetime.strptime(date_string, '%d %B %Y')
+        return jalali_date.togregorian()

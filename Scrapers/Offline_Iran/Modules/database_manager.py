@@ -8,8 +8,6 @@ from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker , Session
 from typing import Iterator
-import jdatetime
-import datetime
 import os
 
 load_dotenv()
@@ -51,24 +49,15 @@ class connection_pool_manager:
             session.close()
 
 class database_manger:
-
-    @staticmethod
-    def parse_jalali_date(date_string: str) -> datetime:
-        jalali_date = jdatetime.datetime.strptime(date_string, '%d %B %Y')
-        return jalali_date.togregorian()
-
     @staticmethod
     def insert_experience(data:Experience_Data):
-
-        #converting the date
-        date = database_manger.parse_jalali_date(data.published_date)
 
         try:
             with connection_pool_manager.get_session() as session:
                 new_record = ExperienceOfflineIran(
                     sender_name=data.sender_name,
                     experience_text=data.experience_text,
-                    published_date=date
+                    published_date=data.published_date
                 )
                 session.add(new_record)
         except Exception as e:
