@@ -4,24 +4,29 @@
 #Libararies
 from botasaurus.browser import browser, Driver
 from botasaurus_driver.solve_cloudflare_captcha import bypass_if_detected
+from botasaurus.soupify import soupify
+from bs4 import BeautifulSoup
 from collections import deque
 
 #Modules
+from Scrapers.Offline_Iran.Modules.Extractor import offline_iran_extractor
 from Scrapers.Offline_Iran.Modules.Interactor import offline_iran_interactor
 from Scrapers.Offline_Iran.Models.Experience_offline_iran import Experience_Data
 from Scrapers.Offline_Iran.Modules.database_manager import database_manger
 
 #global variables
 scrolls:int = 0
-is_reached_end =False
+
+target_date:str = "۸ اسفند ۱۴۰۴"
 pending_experiences: deque[Experience_Data] = deque()
 
-
-#CREATE A TASK SCHEDULE FOR FINISHING THE
 @browser(cache=False, reuse_driver=True)
 def offline_iran_scraper(driver:Driver, data=None) -> int:
     global scrolls
     global pending_experiences
+    global target_date
+
+    is_finished:bool = False
 
     driver.enable_human_mode()
     bypass_if_detected(driver)
@@ -29,26 +34,30 @@ def offline_iran_scraper(driver:Driver, data=None) -> int:
     driver.get("https://offlineiran.com/", bypass_cloudflare=True, timeout=120)
     driver.long_random_sleep()
 
-    offline_iran_interactor.expand_all_texts(driver)
+    while is_finished is False:
+        #Expand all texts
+        offline_iran_interactor.expand_all_texts(driver)
+        driver.long_random_sleep()
 
-    driver.long_random_sleep()
+        #Extract data from Webpage
+        webpage_content:BeautifulSoup = soupify(driver)
+        offline_iran_extractor.extract_experiences(webpage_content , scrolls,pending_experiences )
 
-    #webpage_content:BeautifulSoup = soupify(driver) ->works
+        #Store all of extracted data
+        while pending_experiences:
+            experience=pending_experiences.popleft()
+            if experience.published_date == target_date:
+                is_finished =True
+                break
 
-    #offline_iran_extractor.extract_experiences(webpage_content , scrolls )
-    #offline_iran_interactor.scroll_for_new_comments(driver) -> works
-    #scrolls+=1
+            database_manger.insert_experience(experience)
 
-    driver.prompt("wwwaaaaaiiiitttt")
+
+        offline_iran_interactor.scroll_for_new_comments(driver)
+        scrolls+=1
+
     return 0
 
 if __name__ == '__main__':
-    #offline_iran_scraper()
-    test_data = Experience_Data(
-        sender_name="ناشناس، دانش‌آموز",
-        experience_text="قطع اینترنت سبب شد من (و خیلی‌های دیگه) به عنوان مخالف جنگ و حمله خارجی نتونیم صدامون رو بلند کنیم.",
-        published_date="۱۶ اردیبهشت ۱۴۰۵"
-    )
-
-    database_manger.insert_experience(test_data)
+    offline_iran_scraper()
 
