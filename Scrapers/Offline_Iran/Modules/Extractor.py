@@ -1,13 +1,13 @@
 #Libararies
 from bs4 import BeautifulSoup
+from collections import deque
 
 #modules
 from Scrapers.Offline_Iran.Models.Experience_offline_iran import Experience_Data
 
-
 class offline_iran_extractor:
     @staticmethod
-    def extract_experiences(webpage_content:BeautifulSoup, scroll_numbers):
+    def extract_experiences(webpage_content:BeautifulSoup, scroll_numbers,pending_experiences):
 
         experience_section = webpage_content.find("section", class_="space-y-10")
         if not experience_section:
@@ -52,4 +52,5 @@ class offline_iran_extractor:
 
 
 
-            #attatchs the data class to an queue to f
+
+            pending_experiences.append(experience_data)
