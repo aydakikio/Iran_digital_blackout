@@ -2,7 +2,7 @@
 from bs4 import BeautifulSoup
 
 #modules
-from Scraper.Offline_Iran.Models.Experience_offline_iran import Experience_Data
+from Scrapers.Offline_Iran.Models.Experience_offline_iran import Experience_Data
 
 
 class offline_iran_extractor:
