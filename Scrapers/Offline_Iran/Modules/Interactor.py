@@ -17,6 +17,6 @@ class offline_iran_interactor:
     @staticmethod
     def scroll_for_new_comments(driver:Driver):
         driver.scroll_into_view('section[class="space-y-10"]')
-        driver.scroll(0,3500,smooth_scroll=True)
+        driver.scroll(0,4000,smooth_scroll=True)
 
-        driver.sleep(600)#wait for 600 seconds
+        driver.sleep(300)#wait for 600 seconds
