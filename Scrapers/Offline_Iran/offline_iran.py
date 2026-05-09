@@ -21,7 +21,7 @@ scrolls:int = 0
 target_date:datetime = datetime.datetime(2026, 2, 27)
 pending_experiences: deque[Experience_Data] = deque()
 
-@browser(cache=False, reuse_driver=True)
+@browser(cache=False, reuse_driver=True,headless=True)
 def offline_iran_scraper(driver:Driver, data=None) -> int:
     global scrolls
     global pending_experiences
