@@ -19,4 +19,4 @@ class offline_iran_interactor:
         driver.scroll_into_view('section[class="space-y-10"]')
         driver.scroll(0,4000,smooth_scroll=True)
 
-        driver.sleep(300)#wait for 600 seconds
+        driver.sleep(150)#wait for 150 seconds
