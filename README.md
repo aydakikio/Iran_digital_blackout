@@ -4,6 +4,11 @@ For the shouts of innocent people that faded into darkness of Internet blackout 
 
 An aspect based sentiment analysis of Persian comments on internet blackouts using machine learning and NLP techniques.
 
+
+> [!WARNING]
+> This research is in active development. Findings, methods, datasets,documentations, and conclusions may change at any time. Results may be incomplete or contain errors. Use at your own risk and do not consider them final, verified, or ready for citation.
+
+
 ## 📖 Overview
 This project analyzes public sentiment regarding internet blackout and digital isolation in Iran through aspect-based sentiment analysis. By processing Persian comments from [Offline Iran](https://offlineiran.com/),[Citna](https://www.citna.ir/), [Zoomit](https://www.zoomit.ir/),[Digiato](https://digiato.com/), we extract key aspects (e.g., "government policy," "network quality," "economic impact") and determine sentiment polarity for each aspect.
 
@@ -34,6 +39,12 @@ Iran has experienced slow, heavily filtered internet connection and holds the re
 The dataset collected from Feb 27, 2026 to ??  
 *(status: ongoing / to be updated)*
 
+### Data Sources
+- **[Offline Iran](https://offlineiran.com/)**
+- **[Digiato](https://digiato.com/)**
+- **[Citna](https://www.citna.ir/)**
+- **[Zoomit](https://www.zoomit.ir/)**
+
 ### 🦤 Scrape Schedule
 
 | Website Name  | Session |Data From | Data To | Scrape Start date | Scrape End date | Status |
@@ -44,5 +55,66 @@ The dataset collected from Feb 27, 2026 to ??
 | [Digiato](https://digiato.com/) | **#1** | - | - | - | - | 🟠 Not started | 
 
 
+### 🧭 Accessing the Dataset
 
+---
+## 🐧 Scraper Installation 
+### Prerequisites
+- python 3.8+
+- pip 26.1.1+ package manager
+- chrome browser
+- Git
+
+---
+
+### Step 1: Clone the Repository
+```
+git clone https://github.com/aydakikio/Iran_digital_blackout_sentiment.git
+
+cd Iran_digital_blackout_sentiment
+```
+
+### Step 2: Create Virtual Environment
+```
+# Using venv
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+### Step 3: Install Dependencies
+There are multiple ways to install the required packages, depending on which website do you consider to scrape.
+
+- **offline iran Scraper**
+```
+cd Scrapers/Offline_Iran/
+pip install -r requirements.txt
+```
+
+### Step 4: Configure Environment Variables
+
+- **offline iran Scraper**
+Create a `.env` file in `Scrapers/Offline_Iran` and Set this variable,replace YOUR_DATABASE_URL with your actual database connection string, e.g., postgresql://user:pass@localhost/dbname
+```
+OFFLINE_IRAN_DB_URL=YOUR_DATABSE_URL
+```
+### Step 5: Configure Database Migration (SQL based databased)
+
+### Step 6: Running the Scraper
+- **Offline Iran Scraper**
+```
+python -m Scrapers.Offline_Iran.offline_iran
+```
+---
+## 🤝 Contributing
+we welcome contributions from researchers, developers. 
+
+### Types of Contributions
+- **Code Improvements** - Bug fixes, optimizations, new features
+- **Report Bug**: Report bugs using a comprehensive template
+- **Data Collection** - Help expand data sources and coverage
+- **Documentation** - Improve guides, examples, and tutorials
+- **Testing** - Test edge cases and report issues
+
+---
+## 👨‍💻 Developer Guidelines
 
