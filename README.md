@@ -1,5 +1,31 @@
 # Iran Digital Blackout Sentiment 🕊️
 
+<p align="center">
+  
+[![License: GPL](https://img.shields.io/badge/License-GPL-yellow?style=for-the-badge&logo=gnu&logoColor=white)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python&logoColor=ffd343)](https://python.org)
+[![Kaggle](https://img.shields.io/badge/Kaggle-Dataset-20BEFF?style=for-the-badge&logo=kaggle&logoColor=white)](https://kaggle.com/your-link)
+[![Hugging Face](https://img.shields.io/badge/HuggingFace-Model-FF9D00?style=for-the-badge&logo=huggingface)](https://huggingface.co/HooshvareLab/bert-base-parsbert-uncased)
+<br>
+[![CI Status](https://img.shields.io/github/actions/workflow/status/aydakikio/Iran_digital_blackout_sentiment/ci.yml?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/aydakikio/Iran_digital_blackout_sentiment/actions)
+[![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
+[![Botasaurus](https://img.shields.io/badge/Botasaurus-Scraper-6C3483?style=for-the-badge&logo=python&logoColor=white)](https://github.com/omkarcloud/botasaurus)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Neo4j](https://img.shields.io/badge/Neo4j-008CC1?style=for-the-badge&logo=neo4j&logoColor=white)](https://neo4j.com/)
+[![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white)](https://www.sqlalchemy.org/)
+
+</p>
+
+<p align="center">
+  <a href="#-overview">Overview🦤</a> •
+  <a href="#-features">Features✨</a> •
+   <a href="#-data-set">Dataset🪿</a> •
+  <a href="#-scraper-installation">Installation🐧</a> •
+  <a href="#-contributing">Contribute🤝</a> •
+  <a href="#%E2%80%8D-developer-guidelines">Developer Guidelines 🐳</a>
+</p>
+
+
 For the shouts of innocent people that faded into darkness of Internet blackout 🕊️ 
 
 An aspect based sentiment analysis of Persian comments on internet blackouts using machine learning and NLP techniques.
@@ -402,3 +428,8 @@ pytest --cov=src --cov-report=html
 - Update README for major changes
 - Document API endpoints and parameters
 - Include examples in docstrings
+
+---
+<p align="center">
+  <a href="#iran-digital-blackout-sentiment-%EF%B8%8F">Back to top ↑</a>
+</p>
