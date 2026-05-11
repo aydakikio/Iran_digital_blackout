@@ -4,7 +4,6 @@ For the shouts of innocent people that faded into darkness of Internet blackout 
 
 An aspect based sentiment analysis of Persian comments on internet blackouts using machine learning and NLP techniques.
 
-
 > [!WARNING]
 > This research is in active development. Findings, methods, datasets,documentations, and conclusions may change at any time. Results may be incomplete or contain errors. Use at your own risk and do not consider them final, verified, or ready for citation.
 
@@ -69,7 +68,6 @@ The dataset collected from Feb 27, 2026 to ??
 - PostgreSQL
 - Git
 
----
 
 #### Step 1: Clone the Repository
 ```
@@ -130,23 +128,79 @@ We welcome contributions from researchers, developers. Before submitting, please
 - **Documentation** - Improve guides, examples, and tutorials
 - **Testing** - Test edge cases and report issues
 
-### How to Contribute
-**For Code Contributions:**
-1. Clone the repository:`git clone github.com/aydakikio/Iran_digital_blackout_sentiment.git`
-4. Create a feature branch: `git checkout -b feature/descriptive-name`
-5. Implement your changes following the coding standards in Developer Guidelines
-6. Test thoroughly on physical hardware
-7. Commit with descriptive messages: `git commit -m "Fix: Resolve rate limit issue"`
-8. Push to your branch: `git push origin feature/descriptive-name`
-9. Submit a Pull Request with a clear description of changes and testing performed
+### 🪴 How to Contribute? 
 
+#### 🛡️ Step 0 – Avoid Duplicate Work
+1. **Search open Issues & Pull Requests** – look for keywords related to your idea.  
+2. **Check the Project Board** – if an issue is in the `In Progress` column, it’s already taken.  
+3. **Claim the task before coding** – comment exactly `/claim` on the issue.  
+   - A maintainer will assign you or add the `in progress` label.  
+   - Do **not** start until you see that label.  
+4. **If no issue exists**, create one first and wait for acknowledgment.  
+5. **Already started?** Open a [Draft Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests#draft-pull-requests) immediately with `[WIP]` in the title — this makes your work visible to others.
+
+> ⚡ **Why this matters:** It prevents the awful feeling of discovering someone else already implemented the same thing.  
+> If two people accidentally start the same task, we’ll coordinate in the issue thread and merge the best of both. No effort is wasted.
+
+#### 🌿 Contribution Labels
+
+| Label | Meaning |
+|-------|---------|
+| `in progress` | Someone is actively working on this — please pick something else. |
+| `up for grabs` | Ready for anyone to claim. |
+| `help wanted` | Extra hands are welcome; coordinate in the issue. |
+
+---
+
+### 🧑‍💻 Step-by-Step (After Your Task Is Claimed)
+
+1. **Clone the repository**  
+   ```bash
+   git clone https://github.com/aydakikio/Iran_digital_blackout_sentiment.git
+   ```
+
+2. **Create a feature branch**  
+   ```bash
+   git checkout -b feature/descriptive-name
+   ```
+   Use prefixes like `fix/`, `feat/`, `docs/` for clarity.
+
+3. **Implement your changes**  
+   - Follow the coding standards in our [Developer Guidelines](#‍-developer-guidelines).  
+   - Run the tests on the provided sample data
+
+4. **Write meaningful commits**  
+   ```
+   git commit -m "Fix: Resolve rate limit issue in Citizen scraper"
+   ```
+
+5. **Push your branch**  
+   ```
+   git push origin feature/descriptive-name
+   ```
+
+6. **Open a Pull Request**  
+   - Use the PR template (if available).  
+   - Clearly describe what changed and how you tested it.  
+   - Reference the original issue (e.g., `Closes #12`).  
+   - If your work is still in progress, mark it as a **draft**.
+
+7. **Review & Iterate**  
+   - Maintainers will review and may request changes.  
+   - Once approved, your PR will be merged. Awesome! 🎉
+
+
+#### 🔧 Need Help?
+If anything in this process is unclear, just open a **Discussions** thread or comment on the issue itself.  
+We’re here to make contributing a pleasant experience — you’re doing great!
+
+ 
 **Pull Request Requirements:**
 - Code compiles without warnings
 - Follows existing code style and naming conventions
 - Includes comments for complex logic
 - No debug code or commented-out sections
 
----
 
 ### Bug Reports 🐛
 
@@ -218,11 +272,6 @@ When reporting bugs, provide complete technical details to enable efficient repr
 - Relevant `pip freeze` or `requirements.txt` output.
 ```
 
----
-
-Here's the contribution guide customized for your Persian internet sentiment analysis repository, replacing the original chess/hardware-related items:
-
----
 
 ### Feature Requests
 
@@ -232,7 +281,6 @@ For new features, open an issue describing:
 - **Performance/resource impact** – expected effect on memory consumption, processing time, database size, or model inference speed.
 - **Data and language considerations** – any impact on Persian text handling, new data sources, or compatibility with existing aspects.
 
----
 
 ### Contribution Areas
 
@@ -264,3 +312,93 @@ For new features, open an issue describing:
 ---
 ## 👨‍💻 Developer Guidelines
 
+### Coding Standards
+- Use **snake case** conventions for floders, variables, classes and functions
+- Add **type hints** to function signatures and complex variables (`def preprocess(text: str) -> List[str]:`).
+- **Import order**: standard library → third-party → local modules, each group separated by a blank line.
+- Use absolute imports from the project root (e.g., from Scrapers.Offline_Iran.Modules.Extractor import offline_iran_extractor), as shown in the existing scrapers.
+- Write comments that explain the confusing part of codes
+
+### Branch Naming
+
+### Branch Naming Convention
+
+We use a **structured branch naming** convention to make it immediately clear what a branch is for.
+Every branch name starts with a **type prefix** followed by a short, hyphenated description.
+
+**Examples you'll see in the repository:**
+
+| Branch Name | What It Means |
+|-------------|---------------|
+| `feature/add-aspect-extraction` | A new feature: adding aspect extraction to the pipeline. |
+| `bugfix/fix-persian-encoding` | A bug fix: correcting problems with Persian text encoding. |
+| `docs/update-installation-guide` | A documentation-only change: updating the installation guide. |
+| `refactor/optimize-pipeline` | Code refactoring: making the pipeline faster or cleaner without changing behavior. |
+
+**Why we do this:**
+- **Scannability** — anyone can glance at the branch list and know what’s in progress.
+- **Automatic changelogs** — tools can group commits by type when generating release notes.
+- **No guesswork** — you don't have to open a branch to understand its purpose.
+
+**Allowed prefixes:**
+- `feature/` – new functionality
+- `bugfix/` or `fix/` – bug repairs
+- `docs/` – documentation only
+- `refactor/` – code restructuring (no new features, no bug fixes)
+- `chore/` – maintenance tasks (dependency updates, config changes)
+- `test/` – adding or updating tests
+
+When you create a branch, follow exactly this pattern:
+```
+git checkout -b prefix/short-descriptive-name
+
+```
+
+### Commit Message Format
+
+```
+<type>(<scope>): <subject>
+
+<explanation>
+```
+
+- **Types:** feat, fix, docs, style, refactor, test, chore
+- **Scopes:** scraper, preprocessing, analysis, models, tests
+
+**Example:**
+
+```
+feat(scraper): add Telegram channel support
+
+Implemented async data collection from Telegram channels
+with rate limiting and error handling.
+```
+
+### Testing Requirements
+
+All new features must include tests:
+
+```
+# Run all tests
+pytest
+
+# Run specific test file
+pytest tests/test_aspect_extractor.py
+
+# Run with coverage
+pytest --cov=src --cov-report=html
+```
+
+### Performance Considerations
+
+- ⚡ Optimize for processing 1000+ comments/hour
+- 💾 Minimize memory footprint with generators
+- 🔄 Cache preprocessed data and models
+- 📊 Profile code with `cProfile` before optimization
+
+### Documentation
+
+- Add docstrings to all functions and classes
+- Update README for major changes
+- Document API endpoints and parameters
+- Include examples in docstrings
