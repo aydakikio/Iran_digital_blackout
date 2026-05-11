@@ -59,54 +59,69 @@ The dataset collected from Feb 27, 2026 to ??
 
 ---
 ## 🐧 Scraper Installation 
-### Prerequisites
+
+### Offline Iran Scraper
+
+#### Prerequisites
 - python 3.8+
 - pip 26.1.1+ package manager
 - chrome browser
+- PostgreSQL
 - Git
 
 ---
 
-### Step 1: Clone the Repository
+#### Step 1: Clone the Repository
 ```
 git clone https://github.com/aydakikio/Iran_digital_blackout_sentiment.git
 
 cd Iran_digital_blackout_sentiment
 ```
 
-### Step 2: Create Virtual Environment
+#### Step 2: Create Virtual Environment
 ```
 # Using venv
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
-### Step 3: Install Dependencies
-There are multiple ways to install the required packages, depending on which website do you consider to scrape.
-
-- **offline iran Scraper**
+#### Step 3: Install Dependencies
 ```
 cd Scrapers/Offline_Iran/
 pip install -r requirements.txt
 ```
 
-### Step 4: Configure Environment Variables
+#### Step 4: Configure Environment Variables
+Create `.env` file 
+```
+nano .env 
+```
 
-- **offline iran Scraper**
-Create a `.env` file in `Scrapers/Offline_Iran` and Set this variable,replace YOUR_DATABASE_URL with your actual database connection string, e.g., postgresql://user:pass@localhost/dbname
+Set this variable,replace `YOUR_DATABASE_URL` with your actual database connection string
+
 ```
 OFFLINE_IRAN_DB_URL=YOUR_DATABSE_URL
 ```
-### Step 5: Configure Database Migration (SQL based databased)
 
-### Step 6: Running the Scraper
-- **Offline Iran Scraper**
+#### Step 5: Configure Database Migration
+
+Create `alembic.ini` file 
+```
+mv alembic.ini.example alembic.ini
+```
+replace `YOUR_DATABSE_URL` with your postgerSQL
+```
+sqlalchemy.url = YOUR_DATABSE_URL
+```
+
+#### Step 6: Running the Scraper
 ```
 python -m Scrapers.Offline_Iran.offline_iran
 ```
 ---
 ## 🤝 Contributing
-we welcome contributions from researchers, developers. 
+
+We welcome contributions from researchers, developers. Before submitting, please review the guidelines below to ensure your contribution can be integrated smoothly.
 
 ### Types of Contributions
 - **Code Improvements** - Bug fixes, optimizations, new features
@@ -114,6 +129,137 @@ we welcome contributions from researchers, developers.
 - **Data Collection** - Help expand data sources and coverage
 - **Documentation** - Improve guides, examples, and tutorials
 - **Testing** - Test edge cases and report issues
+
+### How to Contribute
+**For Code Contributions:**
+1. Clone the repository:`git clone github.com/aydakikio/Iran_digital_blackout_sentiment.git`
+4. Create a feature branch: `git checkout -b feature/descriptive-name`
+5. Implement your changes following the coding standards in Developer Guidelines
+6. Test thoroughly on physical hardware
+7. Commit with descriptive messages: `git commit -m "Fix: Resolve rate limit issue"`
+8. Push to your branch: `git push origin feature/descriptive-name`
+9. Submit a Pull Request with a clear description of changes and testing performed
+
+**Pull Request Requirements:**
+- Code compiles without warnings
+- Follows existing code style and naming conventions
+- Includes comments for complex logic
+- No debug code or commented-out sections
+
+---
+
+### Bug Reports 🐛
+
+When reporting bugs, provide complete technical details to enable efficient reproduction and resolution.
+
+**Required Information:**
+
+```
+## Bug Description
+[Clear, concise description of the issue]
+
+## Reproduction Steps
+1. [First step, e.g., run a specific script or send a request to a URL]
+2. [Second step, e.g., input a specific Persian comment into the pipeline]
+3. [Additional steps...]
+
+## Expected Behavior
+[What should happen]
+
+## Actual Behavior
+[What actually happens]
+
+## Environment
+- **OS:** [Windows 10 / Ubuntu 22.04 / macOS 13]
+- **Python Version:** [e.g., 3.10.11]
+- **Virtual Environment:** [venv / conda / poetry]
+- **Key Libraries & Versions:**
+  - Scrapy / BeautifulSoup4: [version]
+  - Transformers / Hazm / Parsivar: [version]
+  - Database adapter (psycopg2, sqlite3): [version]
+  - Dashboard framework (Streamlit / Dash / Flask): [version]
+  - Other relevant libraries (pandas, numpy, etc.)
+- **Database Type & Version:** [SQLite 3.35 / PostgreSQL 15]
+- **Scraping Target:** [Citna / Zoomit / Digiato / Offline Iran] (and the specific page/API if relevant)
+
+## Data Context
+- **Sample Input (if applicable):** [The Persian comment text that caused the error]
+- **Data Volume:** [Approximate number of comments / size of dataset being processed]
+- **Pipeline Stage:** [Scraping / Preprocessing / Aspect Extraction / Sentiment Classification / DB Storage / Dashboard]
+
+## Logs / Error Messages
+
+## Scraper-Specific Information (if scraping issue)
+- **Configuration Files Modified:** [Yes/No – specify]
+- **Proxy/VPN Used:** [Yes/No – details if yes]
+- **robots.txt Respect:** [Yes/No]
+- **Headers / User-Agent Override:** [Specify]
+- **Anti-bot Measures Encountered:** [CAPTCHA, 403, redirect, etc.]
+
+## Model / NLP Details (if analysis issue)
+- **Model Name/Version:** [e.g., bert-base-fa-sentiment, custom model hash]
+- **Tokenizer:** [Hazm / Parsivar / bert-tokenizer]
+- **Aspect List Used:** [e.g., "government policy", "network quality", "economic impact"]
+- **Preprocessing Flags:** [e.g., emoji removal enabled, half-space normalization]
+
+## Automation / Scheduler (if Kaggle update issue)
+- **Workflow Engine:** [GitHub Actions / Cron / Airflow]
+- **Scheduled Time:** [UTC time]
+- **Last Successful Run:** [date/time]
+- **Error Log from Scheduler:** [paste if available]
+
+## Attempted Solutions
+[What you've already tried to fix the issue]
+
+## Additional Context
+- Does the problem occur consistently or intermittently?
+- Any manual code modifications that might be relevant.
+- Screenshots of the dashboard (if applicable).
+- Relevant `pip freeze` or `requirements.txt` output.
+```
+
+---
+
+Here's the contribution guide customized for your Persian internet sentiment analysis repository, replacing the original chess/hardware-related items:
+
+---
+
+### Feature Requests
+
+For new features, open an issue describing:
+- **Use case and benefits** – what problem does it solve and how does it improve the project?
+- **Proposed implementation approach** – which module(s) would be affected (scrapers, preprocessing, ABSA pipeline, dashboard, etc.) and a rough technical plan.
+- **Performance/resource impact** – expected effect on memory consumption, processing time, database size, or model inference speed.
+- **Data and language considerations** – any impact on Persian text handling, new data sources, or compatibility with existing aspects.
+
+---
+
+### Contribution Areas
+
+**High Priority:**
+- Scraper robustness and efficiency improvements (handling anti-bot measures, reducing request time)
+- Memory and speed optimizations in the preprocessing/ABSA pipeline
+- Critical bug fixes (data corruption, silent failures in extraction, dashboard crashes)
+- Improvements to aspect extraction accuracy (especially for rare or overlapping aspects)
+
+**Accepted Contributions:**
+- New scraper modules for additional Persian-language sources (news sites, forums, social media)
+- Enhanced sentiment classification with newer Persian NLP models (e.g., fine-tuned BERT variants)
+- Additional aspect categories and automatic aspect discovery methods
+- Dashboard visualizations and filtering options (time range, source, sentiment distribution)
+- Multilingual support (adding English translations or extending to other languages)
+- Auto-labelling or active learning tools to assist dataset growth
+- Database backend extensions (e.g., PostgreSQL migration scripts, schema versioning)
+- Automated model retraining and evaluation pipelines
+
+**Documentation:**
+- Scraper setup and configuration guides
+- Database schema and data dictionary documentation
+- ABSA pipeline architecture and flow diagrams
+- Kaggle dataset usage and update frequency documentation
+- Local development environment setup (Python version, dependencies, virtual environment)
+- Troubleshooting guides for common scraping or preprocessing issues
+- Code architecture documentation (module interactions, data flow)
 
 ---
 ## 👨‍💻 Developer Guidelines
