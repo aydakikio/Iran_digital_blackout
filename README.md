@@ -1,3 +1,4 @@
+
 # Iran Digital Blackout Sentiment 🕊️
 
 <p align="center">
@@ -6,6 +7,7 @@
 [![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python&logoColor=ffd343)](https://python.org)
 [![Kaggle](https://img.shields.io/badge/Kaggle-Dataset-20BEFF?style=for-the-badge&logo=kaggle&logoColor=white)](https://kaggle.com/your-link)
 [![Hugging Face](https://img.shields.io/badge/HuggingFace-Model-FF9D00?style=for-the-badge&logo=huggingface)](https://huggingface.co/HooshvareLab/bert-base-parsbert-uncased)
+[![Jupyter Notebook](https://img.shields.io/badge/Jupyter-Notebook-F37626?style=for-the-badge&logo=jupyter&logoColor=white)](https://jupyter.org/)
 <br>
 [![CI Status](https://img.shields.io/github/actions/workflow/status/aydakikio/Iran_digital_blackout_sentiment/ci.yml?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/aydakikio/Iran_digital_blackout_sentiment/actions)
 [![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
