@@ -77,14 +77,52 @@ The dataset collected from Feb 27, 2026 to ??
 | Website Name  | Session |Data From | Data To | Scrape Start date | Scrape End date | Status |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 |  [Offline Iran](https://offlineiran.com/) | **#1** | Feb 28 2026  | May 10 2026 | 10 May 2026 (10:19Z) | 10 May 2026 (19:01Z) | 🟢 Finished |
+|  [Offline Iran](https://offlineiran.com/) | **#2** | -  | - | - | - | 🟠 Not started  |
 | [Citna](https://www.citna.ir/) | **#1** | - | - | - | - | 🟠 Not started | 
 | [Zoomit](https://www.zoomit.ir/) | **#1** | - | - | - | - | 🟠 Not started | 
 | [Digiato](https://digiato.com/) | **#1** | - | - | - | - | 🟠 Not started | 
 
 
 ### 🧭 Accessing the Dataset
-Comming Soon!
 
+The dataset is available through three methods:
+
+#### 1. Kaggle
+You can access and download the dataset directly from Kaggle:
+🔗 [Dataset Name on Kaggle](https://www.kaggle.com/datasets/aydakikio/iran-internet-shutdown-narratives) 
+
+#### 2. GitHub Release
+Download the dataset as a packaged release asset from the GitHub repository:
+🔗 [GitHub Releases](https://github.com/aydakikio/Iran_digital_blackout_sentiment/releases) 
+
+#### 3. Clone the Repository
+To get the full dataset alongside the project source, use these commands:
+
+**step 1: clone**
+```
+git clone https://github.com/aydakikio/Iran_digital_blackout_sentiment.git
+```
+
+**step 2: chat the directory**
+```
+cd Iran_digital_blackout_sentiment/data
+```
+
+
+### 🫖 Citation
+
+If you use this dataset in your research or project, please cite it as:
+```
+@misc{
+https://doi.org/10.34740/kaggle/dsv/16280371,
+doi = {10.34740/KAGGLE/DSV/16280371},
+url = {https://www.kaggle.com/dsv/16280371},
+author = {{Ayda Khoshkhan}},
+title = {Iran Internet Shutdown Narratives},
+publisher = {Kaggle},
+year = {2026}
+}
+```
 ---
 ## 🐧 Scraper Installation 
 
