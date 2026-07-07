@@ -25,8 +25,8 @@ scrolls:int = 0
 #target_date:datetime = datetime.datetime(2026, 5, 9)
 
 #session 3
-start_date:datetime = datetime.datetime(2026, 5, 9)
-target_date:datetime = datetime.datetime(2026, 5, 9)
+start_date: datetime = datetime.datetime(2026, 1, 24)   # 13 بهمن 1404
+target_date: datetime = datetime.datetime(2026, 1, 23) # 3 بهمن 1404
 
 pending_experiences: deque[Experience_Data] = deque()
 
@@ -35,6 +35,7 @@ def offline_iran_scraper(driver:Driver, data=None) -> int:
     global scrolls
     global pending_experiences
     global target_date
+    global start_date
 
     is_finished:bool = False
 
@@ -43,6 +44,8 @@ def offline_iran_scraper(driver:Driver, data=None) -> int:
 
     driver.get("https://offlineiran.com/", bypass_cloudflare=True, timeout=120)
     driver.long_random_sleep()
+
+    driver.prompt('wait')
 
     while is_finished is False:
         #Expand all texts
@@ -56,7 +59,12 @@ def offline_iran_scraper(driver:Driver, data=None) -> int:
         #Store all of extracted data
         while pending_experiences:
             experience=pending_experiences.popleft()
-            if experience.published_date <= target_date:
+
+            if experience.published_date > start_date:
+                print(f'ignoring {experience.published_date}')
+                continue
+
+            if experience.published_date < target_date:
                 is_finished =True
                 break
 
