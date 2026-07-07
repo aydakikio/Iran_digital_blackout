@@ -1,69 +1,64 @@
-
-# Iran Digital Blackout Sentiment 🕊️
+# Iran Digital Blackout 🕊️
 
 <p align="center">
   
 [![License: GPL](https://img.shields.io/badge/License-GPL-yellow?style=for-the-badge&logo=gnu&logoColor=white)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python&logoColor=ffd343)](https://python.org)
 [![Kaggle](https://img.shields.io/badge/Kaggle-Dataset-20BEFF?style=for-the-badge&logo=kaggle&logoColor=white)](https://kaggle.com/your-link)
-[![Hugging Face](https://img.shields.io/badge/HuggingFace-Model-FF9D00?style=for-the-badge&logo=huggingface)](https://huggingface.co/HooshvareLab/bert-base-parsbert-uncased)
-[![Jupyter Notebook](https://img.shields.io/badge/Jupyter-Notebook-F37626?style=for-the-badge&logo=jupyter&logoColor=white)](https://jupyter.org/)
-<br>
-[![CI Status](https://img.shields.io/github/actions/workflow/status/aydakikio/Iran_digital_blackout_sentiment/ci.yml?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/aydakikio/Iran_digital_blackout_sentiment/actions)
-[![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
 [![Botasaurus](https://img.shields.io/badge/Botasaurus-Scraper-6C3483?style=for-the-badge&logo=python&logoColor=white)](https://github.com/omkarcloud/botasaurus)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Neo4j](https://img.shields.io/badge/Neo4j-008CC1?style=for-the-badge&logo=neo4j&logoColor=white)](https://neo4j.com/)
 [![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-D71F00?style=for-the-badge&logo=sqlalchemy&logoColor=white)](https://www.sqlalchemy.org/)
-
+[![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
+<br>
 </p>
 
 <p align="center">
   <a href="#-overview">Overview🦤</a> •
   <a href="#-features">Features✨</a> •
-   <a href="#-data-set">Dataset🪿</a> •
+  <a href="#-dataset">Dataset🪿</a> •
   <a href="#-scraper-installation">Installation🐧</a> •
   <a href="#-contributing">Contribute🤝</a> •
-  <a href="#%E2%80%8D-developer-guidelines">Developer Guidelines 🐳</a>
+  <a href="#‍-developer-guidelines">Developer Guidelines🐳</a>
 </p>
 
+For the shouts of innocent people that faded into the darkness of Internet blackout 🕊️
 
-For the shouts of innocent people that faded into darkness of Internet blackout 🕊️ 
-
-An aspect based sentiment analysis of Persian comments on internet blackouts using machine learning and NLP techniques.
+A collection of Persian public comments on internet blackouts in Iran — scraped, cleaned, and published for open research.
 
 > [!WARNING]
-> This research is in active development. Findings, methods, datasets,documentations, and conclusions may change at any time. Results may be incomplete or contain errors. Use at your own risk and do not consider them final, verified, or ready for citation.
+> This project is in active development. Data coverage, scraper behavior, and documentation may change at any time. The dataset is not yet complete. Do not treat current releases as final or exhaustive.
 
+---
 
 ## 📖 Overview
-This project analyzes public sentiment regarding internet blackout and digital isolation in Iran through aspect-based sentiment analysis. By processing Persian comments from [Offline Iran](https://offlineiran.com/),[Citna](https://www.citna.ir/), [Zoomit](https://www.zoomit.ir/),[Digiato](https://digiato.com/), we extract key aspects (e.g., "government policy," "network quality," "economic impact") and determine sentiment polarity for each aspect.
 
-Iran has experienced slow, heavily filtered internet connection and holds the record for the longest nationwide internet blackout (72 days).Many online businesses are destroyed and more people have fallen into poverty by losing thier job. There is no official announcement on when the internet connection will be restored. There is some news about the classification of the Internet that shows the injustice on a broader scale, and some leaked documents show that this process was created to increase censorship and expand suppression horizontally.
+Iran has experienced slow, heavily filtered internet and holds the record for the longest nationwide internet blackout (72 days). Many online businesses were destroyed and more people fell into poverty from losing their jobs. There is no official announcement on when connection will be restored. Leaked documents suggest this process was created to increase censorship and expand suppression horizontally.
 
-### 🗝️ Research Key Goals
-- Extract meaningful aspects from Persian text about internet outages
-- Classify sentiment (positive, negative, neutral) for each aspect
-- Provide insights into public perception and concerns
-- Create a reusable pipeline for Persian sentiment analysis
+This project collects Persian public comments from news and tech websites that covered internet blackouts in Iran. The goal is to build a clean, open, and well-documented dataset that can be used by researchers studying digital rights, censorship, or Persian NLP.
+
+### 🗝️ Project Goals
+- Scrape Persian comments from multiple sources covering internet blackouts
+- Clean and normalize collected text (UTF-8, Persian-specific character handling)
+- Publish the dataset openly on Kaggle and GitHub for community use
+- Maintain a reproducible and extensible scraper architecture
 
 ---
 
 ## ✨ Features
-- **Persian Language Support**: Full UTF-8 support and dedicated preprocessing pipeline for Persian text (normalization, half-space handling, tokenization).
-- **Public Datasets**: The gathered data will be published on GitHub and Kaggle to enable community access and reproducibility.
-- **Scraper Architecture Documentation**: All scraper architecture documents are available [here](https://github.com).
-- **Modular Architecture**: Provides great flexibility to extend or replace components like scrapers, aspect extractors, and sentiment classifiers.
-- **Multi-Database Design**: Supports multiple storage backends (e.g., SQLite for prototyping, PostgreSQL for production) with separate tables for raw comments, extracted aspects, and sentiment results.
-- **Automated Kaggle Update**: The Kaggle dataset is refreshed automatically with the latest scraped and analyzed data via scheduled workflows.
-- **Aspect-Based Sentiment Analysis**: Detects fine-grained aspects (e.g., “government policy”, “network quality”, “economic impact”) in each comment and determines sentiment polarity (positive, negative, neutral) for every aspect.
-- **Persian-Specific Preprocessing**: Includes informal expression mapping, emoji removal, and normalization of Persian-specific characters to improve model accuracy.
-- **Model Evaluation & Benchmarking**: Provides standard metrics (F1-score, accuracy, confusion matrix) and benchmark results on the collected Persian dataset to ensure transparency.
+- **Persian Language Support**: Full UTF-8 support and a dedicated preprocessing pipeline for Persian text (normalization, half-space handling, deduplication).
+- **Public Dataset**: All collected data is published on Kaggle and GitHub to enable open access and reproducibility.
+- **Scraper Architecture Documentation**: All scraper architecture documents are available in the repository.
+- **Modular Scraper Design**: Scrapers are independent modules — easy to extend with new sources without touching existing ones.
+- **Multi-Database Support**: Supports multiple storage backends (SQLite for prototyping, PostgreSQL for production) with separate tables for raw comments and metadata.
+- **Automated Kaggle Updates**: The Kaggle dataset refreshes automatically with newly scraped data via scheduled GitHub Actions workflows.
+- **Resumable Scraping**: Scrapers track progress and can resume from where they left off after interruption.
 
 ---
 
-## 📊 Data set
-The dataset collected from Feb 27, 2026 to ??  
+## 📊 Dataset
+
+Data collection started Feb 27, 2026.  
 *(status: ongoing / to be updated)*
 
 ### Data Sources
@@ -74,40 +69,33 @@ The dataset collected from Feb 27, 2026 to ??
 
 ### 🦤 Scrape Schedule
 
-| Website Name  | Session |Data From | Data To | Scrape Start date | Scrape End date | Status |
+| Website Name | Session | Data From | Data To | Scrape Start | Scrape End | Status |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-|  [Offline Iran](https://offlineiran.com/) | **#1** | Feb 28 2026  | May 10 2026 | 10 May 2026 (10:19Z) | 10 May 2026 (19:01Z) | 🟢 Finished |
-|  [Offline Iran](https://offlineiran.com/) | **#2** | -  | - | - | - | 🟠 Not started  |
-| [Citna](https://www.citna.ir/) | **#1** | - | - | - | - | 🟠 Not started | 
-| [Zoomit](https://www.zoomit.ir/) | **#1** | - | - | - | - | 🟠 Not started | 
-| [Digiato](https://digiato.com/) | **#1** | - | - | - | - | 🟠 Not started | 
-
+| [Offline Iran](https://offlineiran.com/) | **#1** | Feb 28 2026 | May 10 2026 | 10 May 2026 (10:19Z) | 10 May 2026 (19:01Z) | 🟢 Finished |
+| [Offline Iran](https://offlineiran.com/) | **#2** | - | - | - | - | 🟠 Not started |
+| [Citna](https://www.citna.ir/) | **#1** | - | - | - | - | 🟠 Not started |
+| [Zoomit](https://www.zoomit.ir/) | **#1** | - | - | - | - | 🟠 Not started |
+| [Digiato](https://digiato.com/) | **#1** | - | - | - | - | 🟠 Not started |
 
 ### 🧭 Accessing the Dataset
 
-The dataset is available through three methods:
-
 #### 1. Kaggle
-You can access and download the dataset directly from Kaggle:
-🔗 [Dataset Name on Kaggle](https://www.kaggle.com/datasets/aydakikio/iran-internet-shutdown-narratives) 
+🔗 [Iran Internet Shutdown Narratives on Kaggle](https://www.kaggle.com/datasets/aydakikio/iran-internet-shutdown-narratives)
 
 #### 2. GitHub Release
-Download the dataset as a packaged release asset from the GitHub repository:
-🔗 [GitHub Releases](https://github.com/aydakikio/Iran_digital_blackout_sentiment/releases) 
+🔗 [GitHub Releases](https://github.com/aydakikio/Iran_digital_blackout_sentiment/releases)
 
 #### 3. Clone the Repository
-To get the full dataset alongside the project source, use these commands:
 
-**step 1: clone**
-```
+**Step 1: Clone**
+```bash
 git clone https://github.com/aydakikio/Iran_digital_blackout_sentiment.git
 ```
 
-**step 2: chat the directory**
-```
+**Step 2: Navigate to data**
+```bash
 cd Iran_digital_blackout_sentiment/data
 ```
-
 
 ### 🫖 Citation
 
@@ -123,91 +111,87 @@ publisher = {Kaggle},
 year = {2026}
 }
 ```
+
 ---
-## 🐧 Scraper Installation 
+
+## 🐧 Scraper Installation
 
 ### Offline Iran Scraper
 
 #### Prerequisites
-- python 3.8+
-- pip 26.1.1+ package manager
-- chrome browser
+- Python 3.8+
+- pip 26.1.1+
+- Chrome browser
 - PostgreSQL
 - Git
 
-
 #### Step 1: Clone the Repository
-```
+```bash
 git clone https://github.com/aydakikio/Iran_digital_blackout_sentiment.git
-
 cd Iran_digital_blackout_sentiment
 ```
 
 #### Step 2: Create Virtual Environment
-```
-# Using venv
+```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
 #### Step 3: Install Dependencies
-```
+```bash
 cd Scrapers/Offline_Iran/
 pip install -r requirements.txt
 ```
 
 #### Step 4: Configure Environment Variables
-Create `.env` file 
-```
-nano .env 
+Create a `.env` file:
+```bash
+nano .env
 ```
 
-Set this variable,replace `YOUR_DATABASE_URL` with your actual database connection string
-
+Set the following variable, replacing `YOUR_DATABASE_URL` with your actual connection string:
 ```
-OFFLINE_IRAN_DB_URL=YOUR_DATABSE_URL
+OFFLINE_IRAN_DB_URL=YOUR_DATABASE_URL
 ```
 
 #### Step 5: Configure Database Migration
-
-Create `alembic.ini` file 
-```
+```bash
 mv alembic.ini.example alembic.ini
 ```
-replace `YOUR_DATABSE_URL` with your postgerSQL
+
+Replace `YOUR_DATABASE_URL` with your PostgreSQL connection string inside `alembic.ini`:
 ```
-sqlalchemy.url = YOUR_DATABSE_URL
+sqlalchemy.url = YOUR_DATABASE_URL
 ```
 
-#### Step 6: Running the Scraper
-```
+#### Step 6: Run the Scraper
+```bash
 python -m Scrapers.Offline_Iran.offline_iran
 ```
+
 ---
+
 ## 🤝 Contributing
 
-We welcome contributions from researchers, developers. Before submitting, please review the guidelines below to ensure your contribution can be integrated smoothly.
+We welcome contributions from researchers and developers. Please review the guidelines below before submitting.
 
 ### Types of Contributions
-- **Code Improvements** - Bug fixes, optimizations, new features
-- **Report Bug**: Report bugs using a comprehensive template
-- **Data Collection** - Help expand data sources and coverage
-- **Documentation** - Improve guides, examples, and tutorials
-- **Testing** - Test edge cases and report issues
+- **Code Improvements** — Bug fixes, optimizations, new features
+- **Bug Reports** — Report issues using the template below
+- **Data Collection** — Help expand source coverage
+- **Documentation** — Improve guides, examples, and setup instructions
+- **Testing** — Test edge cases and report unexpected behavior
 
-### 🪴 How to Contribute? 
+### 🪴 How to Contribute
 
 #### 🛡️ Step 0 – Avoid Duplicate Work
-1. **Search open Issues & Pull Requests** – look for keywords related to your idea.  
-2. **Check the Project Board** – if an issue is in the `In Progress` column, it’s already taken.  
-3. **Claim the task before coding** – comment exactly `/claim` on the issue.  
-   - A maintainer will assign you or add the `in progress` label.  
-   - Do **not** start until you see that label.  
-4. **If no issue exists**, create one first and wait for acknowledgment.  
-5. **Already started?** Open a [Draft Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests#draft-pull-requests) immediately with `[WIP]` in the title — this makes your work visible to others.
+1. **Search open Issues & Pull Requests** for keywords related to your idea.
+2. **Check the Project Board** — if an issue is `In Progress`, it's already taken.
+3. **Claim the task before coding** — comment exactly `/claim` on the issue. Wait for the `in progress` label before starting.
+4. **If no issue exists**, open one first and wait for acknowledgment.
+5. **Already started?** Open a [Draft Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests#draft-pull-requests) with `[WIP]` in the title immediately.
 
-> ⚡ **Why this matters:** It prevents the awful feeling of discovering someone else already implemented the same thing.  
-> If two people accidentally start the same task, we’ll coordinate in the issue thread and merge the best of both. No effort is wasted.
+> ⚡ **Why this matters:** It prevents the awful feeling of discovering someone else already built the same thing. If two people accidentally start the same task, we'll coordinate in the issue thread and merge the best of both. No effort is wasted.
 
 #### 🌿 Contribution Labels
 
@@ -217,71 +201,70 @@ We welcome contributions from researchers, developers. Before submitting, please
 | `up for grabs` | Ready for anyone to claim. |
 | `help wanted` | Extra hands are welcome; coordinate in the issue. |
 
----
-
 ### 🧑‍💻 Step-by-Step (After Your Task Is Claimed)
 
-1. **Clone the repository**  
+1. **Clone the repository**
    ```bash
    git clone https://github.com/aydakikio/Iran_digital_blackout_sentiment.git
    ```
 
-2. **Create a feature branch**  
+2. **Create a feature branch**
    ```bash
    git checkout -b feature/descriptive-name
    ```
    Use prefixes like `fix/`, `feat/`, `docs/` for clarity.
 
-3. **Implement your changes**  
-   - Follow the coding standards in our [Developer Guidelines](#‍-developer-guidelines).  
-   - Run the tests on the provided sample data
+3. **Implement your changes** following the [Developer Guidelines](#-developer-guidelines).
 
-4. **Write meaningful commits**  
+4. **Write meaningful commits**
    ```
-   git commit -m "Fix: Resolve rate limit issue in Citizen scraper"
+   git commit -m "Fix: Resolve rate limit issue in Citna scraper"
    ```
 
-5. **Push your branch**  
-   ```
+5. **Push your branch**
+   ```bash
    git push origin feature/descriptive-name
    ```
 
-6. **Open a Pull Request**  
-   - Use the PR template (if available).  
-   - Clearly describe what changed and how you tested it.  
-   - Reference the original issue (e.g., `Closes #12`).  
-   - If your work is still in progress, mark it as a **draft**.
+6. **Open a Pull Request**
+   - Clearly describe what changed and how you tested it.
+   - Reference the original issue (e.g., `Closes #12`).
+   - If still in progress, mark it as a **draft**.
 
-7. **Review & Iterate**  
-   - Maintainers will review and may request changes.  
-   - Once approved, your PR will be merged. Awesome! 🎉
+7. **Review & Iterate** — maintainers will review and may request changes. Once approved, it gets merged. 🎉
 
-
-#### 🔧 Need Help?
-If anything in this process is unclear, just open a **Discussions** thread or comment on the issue itself.  
-We’re here to make contributing a pleasant experience — you’re doing great!
-
- 
 **Pull Request Requirements:**
 - Code compiles without warnings
 - Follows existing code style and naming conventions
 - Includes comments for complex logic
 - No debug code or commented-out sections
 
+#### 🔧 Need Help?
+Open a **Discussions** thread or comment on the issue. We're here to make contributing a pleasant experience!
+
+### Contribution Areas
+
+**High Priority:**
+- Scraper robustness and efficiency (anti-bot handling, reduced request times, retry logic)
+- Resumable scraping and crash recovery
+- Critical bug fixes (data corruption, silent failures, duplicate records)
+- Data deduplication and cleaning improvements
+
+**Accepted Contributions:**
+- New scraper modules for additional Persian-language sources (news sites, forums)
+- Database backend extensions (schema versioning, migration scripts)
+- Kaggle dataset automation improvements
+- Documentation and setup guides
 
 ### Bug Reports 🐛
-
-When reporting bugs, provide complete technical details to enable efficient reproduction and resolution.
-
-**Required Information:**
 
 ```
 ## Bug Description
 [Clear, concise description of the issue]
 
 ## Reproduction Steps
-1. [First step, e.g., run a specific script or send a request to a URL]
-2. [Second step, e.g., input a specific Persian comment into the pipeline]
+1. [First step]
+2. [Second step]
 3. [Additional steps...]
 
 ## Expected Behavior
@@ -291,134 +274,65 @@ When reporting bugs, provide complete technical details to enable efficient repr
 [What actually happens]
 
 ## Environment
-- **OS:** [Windows 10 / Ubuntu 22.04 / macOS 13]
+- **OS:** [e.g., Ubuntu 22.04]
 - **Python Version:** [e.g., 3.10.11]
 - **Virtual Environment:** [venv / conda / poetry]
 - **Key Libraries & Versions:**
-  - Scrapy / BeautifulSoup4: [version]
-  - Transformers / Hazm / Parsivar: [version]
-  - Database adapter (psycopg2, sqlite3): [version]
-  - Dashboard framework (Streamlit / Dash / Flask): [version]
-  - Other relevant libraries (pandas, numpy, etc.)
-- **Database Type & Version:** [SQLite 3.35 / PostgreSQL 15]
-- **Scraping Target:** [Citna / Zoomit / Digiato / Offline Iran] (and the specific page/API if relevant)
+  - Botasaurus: [version]
+  - SQLAlchemy / psycopg2: [version]
+  - pandas, requests, etc.: [versions]
+- **Database Type & Version:** [e.g., PostgreSQL 15]
+- **Scraping Target:** [Citna / Zoomit / Digiato / Offline Iran]
 
-## Data Context
-- **Sample Input (if applicable):** [The Persian comment text that caused the error]
-- **Data Volume:** [Approximate number of comments / size of dataset being processed]
-- **Pipeline Stage:** [Scraping / Preprocessing / Aspect Extraction / Sentiment Classification / DB Storage / Dashboard]
+## Scraper Details
+- **Configuration Files Modified:** [Yes/No — specify]
+- **Proxy/VPN Used:** [Yes/No — details if yes]
+- **robots.txt Respected:** [Yes/No]
+- **Anti-bot Measures Encountered:** [CAPTCHA, 403, redirect, etc.]
+- **Approximate Data Volume at Time of Error:** [number of records / pages]
 
 ## Logs / Error Messages
-
-## Scraper-Specific Information (if scraping issue)
-- **Configuration Files Modified:** [Yes/No – specify]
-- **Proxy/VPN Used:** [Yes/No – details if yes]
-- **robots.txt Respect:** [Yes/No]
-- **Headers / User-Agent Override:** [Specify]
-- **Anti-bot Measures Encountered:** [CAPTCHA, 403, redirect, etc.]
-
-## Model / NLP Details (if analysis issue)
-- **Model Name/Version:** [e.g., bert-base-fa-sentiment, custom model hash]
-- **Tokenizer:** [Hazm / Parsivar / bert-tokenizer]
-- **Aspect List Used:** [e.g., "government policy", "network quality", "economic impact"]
-- **Preprocessing Flags:** [e.g., emoji removal enabled, half-space normalization]
-
-## Automation / Scheduler (if Kaggle update issue)
-- **Workflow Engine:** [GitHub Actions / Cron / Airflow]
-- **Scheduled Time:** [UTC time]
-- **Last Successful Run:** [date/time]
-- **Error Log from Scheduler:** [paste if available]
+[paste here]
 
 ## Attempted Solutions
-[What you've already tried to fix the issue]
+[What you've already tried]
 
 ## Additional Context
 - Does the problem occur consistently or intermittently?
-- Any manual code modifications that might be relevant.
-- Screenshots of the dashboard (if applicable).
-- Relevant `pip freeze` or `requirements.txt` output.
+- Relevant `pip freeze` output if dependency-related.
 ```
-
 
 ### Feature Requests
 
 For new features, open an issue describing:
-- **Use case and benefits** – what problem does it solve and how does it improve the project?
-- **Proposed implementation approach** – which module(s) would be affected (scrapers, preprocessing, ABSA pipeline, dashboard, etc.) and a rough technical plan.
-- **Performance/resource impact** – expected effect on memory consumption, processing time, database size, or model inference speed.
-- **Data and language considerations** – any impact on Persian text handling, new data sources, or compatibility with existing aspects.
-
-
-### Contribution Areas
-
-**High Priority:**
-- Scraper robustness and efficiency improvements (handling anti-bot measures, reducing request time)
-- Memory and speed optimizations in the preprocessing/ABSA pipeline
-- Critical bug fixes (data corruption, silent failures in extraction, dashboard crashes)
-- Improvements to aspect extraction accuracy (especially for rare or overlapping aspects)
-
-**Accepted Contributions:**
-- New scraper modules for additional Persian-language sources (news sites, forums, social media)
-- Enhanced sentiment classification with newer Persian NLP models (e.g., fine-tuned BERT variants)
-- Additional aspect categories and automatic aspect discovery methods
-- Dashboard visualizations and filtering options (time range, source, sentiment distribution)
-- Multilingual support (adding English translations or extending to other languages)
-- Auto-labelling or active learning tools to assist dataset growth
-- Database backend extensions (e.g., PostgreSQL migration scripts, schema versioning)
-- Automated model retraining and evaluation pipelines
-
-**Documentation:**
-- Scraper setup and configuration guides
-- Database schema and data dictionary documentation
-- ABSA pipeline architecture and flow diagrams
-- Kaggle dataset usage and update frequency documentation
-- Local development environment setup (Python version, dependencies, virtual environment)
-- Troubleshooting guides for common scraping or preprocessing issues
-- Code architecture documentation (module interactions, data flow)
+- **Use case and benefits** — what problem does it solve?
+- **Proposed implementation** — which module(s) would be affected and a rough technical plan.
+- **Performance/resource impact** — effect on memory, processing time, or database size.
 
 ---
+
 ## 👨‍💻 Developer Guidelines
 
 ### Coding Standards
-- Use **snake case** conventions for floders, variables, classes and functions
-- Add **type hints** to function signatures and complex variables (`def preprocess(text: str) -> List[str]:`).
-- **Import order**: standard library → third-party → local modules, each group separated by a blank line.
-- Use absolute imports from the project root (e.g., from Scrapers.Offline_Iran.Modules.Extractor import offline_iran_extractor), as shown in the existing scrapers.
-- Write comments that explain the confusing part of codes
+- Use **snake_case** for folders, variables, classes, and functions.
+- Add **type hints** to function signatures (`def fetch_page(url: str) -> str:`).
+- **Import order**: standard library → third-party → local modules, separated by blank lines.
+- Use absolute imports from the project root (e.g., `from Scrapers.Offline_Iran.Modules.Extractor import offline_iran_extractor`).
+- Write comments that explain the *why*, not just the *what*.
 
 ### Branch Naming
 
-### Branch Naming Convention
-
-We use a **structured branch naming** convention to make it immediately clear what a branch is for.
-Every branch name starts with a **type prefix** followed by a short, hyphenated description.
-
-**Examples you'll see in the repository:**
-
 | Branch Name | What It Means |
 |-------------|---------------|
-| `feature/add-aspect-extraction` | A new feature: adding aspect extraction to the pipeline. |
-| `bugfix/fix-persian-encoding` | A bug fix: correcting problems with Persian text encoding. |
-| `docs/update-installation-guide` | A documentation-only change: updating the installation guide. |
-| `refactor/optimize-pipeline` | Code refactoring: making the pipeline faster or cleaner without changing behavior. |
+| `feature/add-zoomit-scraper` | New feature: adding a Zoomit scraper. |
+| `bugfix/fix-persian-encoding` | Bug fix: correcting Persian text encoding. |
+| `docs/update-installation-guide` | Documentation update only. |
+| `refactor/optimize-db-writes` | Refactoring: cleaner/faster DB writes, no behavior change. |
 
-**Why we do this:**
-- **Scannability** — anyone can glance at the branch list and know what’s in progress.
-- **Automatic changelogs** — tools can group commits by type when generating release notes.
-- **No guesswork** — you don't have to open a branch to understand its purpose.
+**Allowed prefixes:** `feature/`, `bugfix/`, `fix/`, `docs/`, `refactor/`, `chore/`, `test/`
 
-**Allowed prefixes:**
-- `feature/` – new functionality
-- `bugfix/` or `fix/` – bug repairs
-- `docs/` – documentation only
-- `refactor/` – code restructuring (no new features, no bug fixes)
-- `chore/` – maintenance tasks (dependency updates, config changes)
-- `test/` – adding or updating tests
-
-When you create a branch, follow exactly this pattern:
-```
+```bash
 git checkout -b prefix/short-descriptive-name
-
 ```
 
 ### Commit Message Format
@@ -429,48 +343,44 @@ git checkout -b prefix/short-descriptive-name
 <explanation>
 ```
 
-- **Types:** feat, fix, docs, style, refactor, test, chore
-- **Scopes:** scraper, preprocessing, analysis, models, tests
+- **Types:** `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
+- **Scopes:** `scraper`, `preprocessing`, `database`, `pipeline`, `tests`
 
 **Example:**
-
 ```
-feat(scraper): add Telegram channel support
+feat(scraper): add Zoomit scraper module
 
-Implemented async data collection from Telegram channels
-with rate limiting and error handling.
+Implemented async comment collection from Zoomit article pages
+with rate limiting, retry logic, and resume support.
 ```
 
 ### Testing Requirements
 
-All new features must include tests:
-
-```
+```bash
 # Run all tests
 pytest
 
-# Run specific test file
-pytest tests/test_aspect_extractor.py
+# Run a specific test file
+pytest tests/test_offline_iran_scraper.py
 
 # Run with coverage
 pytest --cov=src --cov-report=html
 ```
 
 ### Performance Considerations
-
-- ⚡ Optimize for processing 1000+ comments/hour
-- 💾 Minimize memory footprint with generators
-- 🔄 Cache preprocessed data and models
-- 📊 Profile code with `cProfile` before optimization
+- ⚡ Optimize for 1000+ records/hour throughput
+- 💾 Use generators to minimize memory footprint
+- 🔄 Cache session state to support resumable runs
+- 📊 Profile with `cProfile` before optimizing
 
 ### Documentation
-
 - Add docstrings to all functions and classes
-- Update README for major changes
-- Document API endpoints and parameters
-- Include examples in docstrings
+- Update README for any major change
+- Document database schema and field definitions
+- Include usage examples in docstrings
 
 ---
+
 <p align="center">
-  <a href="#iran-digital-blackout-sentiment-%EF%B8%8F">Back to top ↑</a>
+  <a href="#iran-digital-blackout--data-collection-%EF%B8%8F">Back to top ↑</a>
 </p>
