@@ -18,11 +18,14 @@ from Scrapers.Offline_Iran.Modules.database_manager import database_manger
 #global variables
 scrolls:int = 0
 
-
 #session 1
 #target_date:datetime = datetime.datetime(2026, 2, 27)
 
 #session 2
+#target_date:datetime = datetime.datetime(2026, 5, 9)
+
+#session 3
+start_date:datetime = datetime.datetime(2026, 5, 9)
 target_date:datetime = datetime.datetime(2026, 5, 9)
 
 pending_experiences: deque[Experience_Data] = deque()
@@ -60,7 +63,7 @@ def offline_iran_scraper(driver:Driver, data=None) -> int:
             database_manger.insert_experience(experience)
 
 
-        offline_iran_interactor.scroll_for_new_comments(driver)
+        offline_iran_interactor.get_new_experiences(driver)
         scrolls+=1
 
     return 0

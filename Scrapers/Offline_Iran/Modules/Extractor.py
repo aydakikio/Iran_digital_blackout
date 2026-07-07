@@ -18,12 +18,8 @@ class offline_iran_extractor:
 
         experiences = experience_section.find_all('div', class_='md:block', recursive=False)
 
-        #Creating Filters the results
-        start_index = scroll_numbers*20
-        end_index = ((scroll_numbers+1)*20)
-
         #Iterate through the filtered list
-        for I,experience in  enumerate(experiences[start_index:end_index]):
+        for I,experience in  enumerate(experiences):
             print(f'Getting the {I}th experience')
 
             experience_text_wrapper = experience.find("p", class_="mb-2")

@@ -15,8 +15,8 @@ class offline_iran_interactor:
         """)
 
     @staticmethod
-    def scroll_for_new_comments(driver:Driver):
-        driver.scroll_into_view('section[class="space-y-10"]')
-        driver.scroll(0,4000,smooth_scroll=True)
-
-        driver.sleep(150)#wait for 150 seconds
+    def get_new_experiences(driver:Driver):
+        driver.run_js("""
+            document.querySelectorAll('section.space-y-10 > div.flex.flex-col').forEach((el, i) => { if (i < 20) el.remove(); });
+        """)
+        driver.sleep(60)#wait for 60 seconds
