@@ -1,9 +1,27 @@
 import pandas as pd
 
-df = pd.read_csv('data.csv', encoding='utf-8')
+def remove_names():
+    df = pd.read_csv('data.csv', encoding='utf-8')
+    
+    col = 'sender_name'
+    
+    df[col] = df[col].astype(str).str.split('،', n=1).str[1].str.strip()
+    
+    df.to_csv('data_raw.csv', index=False, encoding='utf-8')
+    
 
-col = 'sender_name'
+def fix_numbers():
+    # Load the CSV
+    df = pd.read_csv("data.csv")
 
-df[col] = df[col].astype(str).str.split('،', n=1).str[1].str.strip()
+    # Reset the ID column to start from 1
+    df["id"] = range(1, len(df) + 1)
 
-df.to_csv('data_raw.csv', index=False, encoding='utf-8')
+    # Save back to CSV
+    df.to_csv("data.csv", index=False)
+
+    print(f"Done! ID column reset for {len(df)} rows.")
+
+
+if __name__ == '__main__':
+    fix_numbers()
