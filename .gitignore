@@ -56,7 +56,6 @@ cover/
 *.pot
 
 # Django stuff:
-*.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
@@ -222,4 +221,6 @@ __marimo__/
 Scrapers/Offline_Iran/.env
 /Scrapers/Offline_Iran/alembic.ini
 
-parsbert_v3_offline/
+/Scrapers/Citna/error_logs/
+/Scrapers/Citna/output
+
