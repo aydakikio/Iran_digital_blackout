@@ -4,12 +4,15 @@ import uuid
 
 @dataclass
 class Comment:
-    body:str = "None"
-    author:str = "None"
+    body:str = None
+    author:str = None
     likes:int = 0
-    comment_id:str = "None"
-    news_uuid:str = "None"
-    replied_comment:str = "None"
+    depth:int = 0
+    comment_id:str = None
+    news_uuid:str = None
+    replied_comment:str = None
+    parent_comment_id: str = None
+
 
     published_time: datetime = field(default_factory=datetime.now)
     comment_uuid: str = field(default_factory=lambda: str(uuid.uuid4()))

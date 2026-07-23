@@ -47,11 +47,8 @@ def citna_scraper(driver:Driver, data=None) -> int:
 
     news_webpage_content: BeautifulSoup = soupify(driver)
 
-    #news:News = News()
-    #Extractor.extract_news(news_webpage_content,news)
-
-    sample_uuid :str = str(uuid.uuid4())
-    Extractor.extract_comments(news_webpage_content,sample_uuid)
+    news:News = News()
+    Extractor.extract_news(news_webpage_content,news)
 
 
     return 0

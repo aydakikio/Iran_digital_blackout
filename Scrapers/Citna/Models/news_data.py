@@ -4,12 +4,12 @@ import uuid
 
 @dataclass
 class News:
-    url: str = "None"
-    title: str = "None"
-    description:str = "None"
-    body: str = "None"
-    news_code: str = "None"
-    reporter: str = "None"
+    url: str = None
+    title: str = None
+    description:str = None
+    body: str = None
+    news_code: str = None
+    reporter: str = None
     likes:int = 0
 
     tags: list[str] = field(default_factory=list)

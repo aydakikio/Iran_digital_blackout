@@ -55,7 +55,7 @@ class Extractor :
         news.description = html_content.find('div' , class_='field--name-field-lead').get_text()
 
         #news body
-        news.body = html_content.find('div' , class_='clearfix text-formatted field field--name-body field--type-text-with-summary field--label-visually_hidden').get_text().replace('متن خبر' ,'').replace('انتهای پیام','')
+        news.body = html_content.find('div' , class_=['field--type-text-with-summary','field--label-visually_hidden']).get_text().replace('متن خبر' ,'').replace('انتهای پیام','')
 
         #news tags links field__items
         news_tag_container = html_content.find('ul' , class_='links field__items')
@@ -76,46 +76,64 @@ class Extractor :
         #Extract the comments
         Extractor.extract_comments(html_content, news.news_uuid)
 
-    
     @staticmethod
-    def extract_comments(html_content:BeautifulSoup,news_uuid:str):
-        comment_wrapper:Tag = html_content.find('section', class_=["field--name-comment", "field--type-comment","comment-wrapper"])
+    def extract_comments(html_content: BeautifulSoup, news_uuid: str):
+        comment_wrapper: Tag = html_content.find('section', class_=["comment-wrapper"])
 
-        replies=deque()
-        for I,child_tag in enumerate(comment_wrapper.children):
-            if not isinstance(child_tag, Tag):
-                continue
+        comment_map: dict[str, str] = {}
 
-            #check if it is comment or a reply
-            if child_tag.name == 'div':
-                if 'layout--onecol' in (child_tag.get('class') or []): #It is a comment
+        # queue items
+        queue: deque[tuple[Tag, str | None, int]] = deque()
+        queue.append((comment_wrapper, None, 0))
 
-                    #create data object
-                    comment:Comment = Comment()
+        while queue:
+            wrapper, parent_comment_id, depth = queue.popleft()
+            last_comment_id: str | None = parent_comment_id
 
-                    #Getting Author
-                    comment.author=child_tag.find('div', class_=['field--name-comment-title']).get_text(strip=True)
+            for child_tag in wrapper.children:
+                if not isinstance(child_tag, Tag):
+                    continue
+                if child_tag.name != 'div':
+                    continue
 
-                    #Getting Datetime
-                    comment.published_time=Extractor.parse_jalali_datetime(child_tag.find('div',class_=['field--name-comment-post-date']).get_text(strip=True))
+                classes = child_tag.get('class') or []
 
-                    #Getting comment body
-                    comment.body=child_tag.find('div',class_=['field--name-field-body']).get_text()
+                if 'layout--onecol' in classes:
+                    comment = Comment()
+                    comment.news_uuid = news_uuid
+                    comment.depth = depth
+                    comment.parent_comment_id = parent_comment_id
+                    comment.parent_uuid = comment_map.get(parent_comment_id) if parent_comment_id else None
 
-                    like_wrapper= child_tag.find('div', class_=['flag-likecomment'])
+                    # Getting Author
+                    comment.author = child_tag.find('div', class_=['field--name-comment-title']).get_text(strip=True)
 
-                    #Getting comment id
-                    comment.comment_id= re.search(r'/likecomment/(\d+)/', like_wrapper.find('a')['href']).group(1)
+                    # Getting Datetime
+                    comment.published_time = Extractor.parse_jalali_datetime(
+                        child_tag.find('div', class_=['field--name-comment-post-date']).get_text(strip=True)
+                    )
 
-                    #Getting like counts
-                    comment.likes=int(like_wrapper.find('span').get_text(strip=True)[1:-1])
+                    # Getting comment body
+                    comment.body = child_tag.find('div', class_=['field--name-field-body']).get_text()
 
-                    #Save into the database
+                    like_wrapper = child_tag.find('div', class_=['flag-likecomment'])
+
+                    # Getting comment id
+                    comment.comment_id = re.search(r'/likecomment/(\d+)/', like_wrapper.find('a')['href']).group(1)
+
+                    # Getting like count
+                    comment.likes = int(like_wrapper.find('span').get_text(strip=True)[1:-1])
+
+                    # Track in map and update last seen
+                    comment_map[comment.comment_id] = comment.comment_uuid
+                    last_comment_id = comment.comment_id
+
+                    # Save into the database
                     Database_Manager.save_comment(comment)
 
-                else: #It is a reply
+                elif 'indented' in classes:
+                    queue.append((child_tag, last_comment_id, depth + 1))
 
-                    print()
 
     @staticmethod
     def parse_jalali_datetime(datetime_string: str) -> datetime:
