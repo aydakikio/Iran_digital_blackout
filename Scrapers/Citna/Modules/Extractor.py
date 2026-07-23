@@ -1,11 +1,13 @@
+#libararies
+from datetime import datetime,timezone
 from bs4 import BeautifulSoup,Tag
 from collections import deque
-import jdatetime
-from datetime import datetime
 from zoneinfo import ZoneInfo
+from loguru import logger
+import jdatetime
 import re
 
-#Models
+#Data Classes
 from Scrapers.Citna.Models.comment_data import Comment
 from Scrapers.Citna.Models.news_data import News
 
@@ -14,7 +16,7 @@ from Scrapers.Citna.Modules.Database_manager import Database_Manager
 
 class Extractor :
     @staticmethod
-    def extract_news_link(html_content:BeautifulSoup, pending_news:deque):
+    def extract_news_link(html_content:BeautifulSoup, pending_news:deque) -> None:
         articles_wrapper:Tag = html_content.find("div",class_='item-list')
 
         articles:Tag=articles_wrapper.find('ul')
@@ -29,21 +31,21 @@ class Extractor :
 
 
             #extract published time
-            published_datetime=article.find('div',class_='field--name-node-post-date').get_text(strip=True)
+            published_datetime=Extractor.parse_jalali_datetime(article.find('div',class_='field--name-node-post-date').get_text(strip=True))
 
             #check if it is int the range or not
+            if Extractor.in_range(published_datetime):
+                #Add that to queue
+                news:News=News()
+                news.published_time=published_datetime
+                news.url=f'https://www.citna.ir{partial_link}'
 
-            #Add that to queue
-            news:News=News()
-            news.published_time=Extractor.parse_jalali_datetime(published_datetime)
-            news.url=f'https://www.citna.ir{partial_link}'
-
-
-            pending_news.append(news)
-
+                pending_news.append(news)
+            else:
+                logger.info('News is out of range')
 
     @staticmethod
-    def extract_news(html_content:BeautifulSoup, news:News):
+    def extract_news(html_content:BeautifulSoup, news:News) -> None:
 
         #Getting news code
         news.news_code= html_content.find('span', class_='nid').get_text(strip=True).replace("کد خبر: ", "")
@@ -77,7 +79,7 @@ class Extractor :
         Extractor.extract_comments(html_content, news.news_uuid)
 
     @staticmethod
-    def extract_comments(html_content: BeautifulSoup, news_uuid: str):
+    def extract_comments(html_content: BeautifulSoup, news_uuid: str) -> None:
         comment_wrapper: Tag = html_content.find('section', class_=["comment-wrapper"])
 
         comment_map: dict[str, str] = {}
@@ -148,4 +150,13 @@ class Extractor :
             except ValueError:
                 continue
 
+        logger.error(f"Unrecognized datetime format: '{datetime_string}'")
         raise ValueError(f"Unrecognized datetime format: '{datetime_string}'")
+
+    @staticmethod
+    def in_range(dt: datetime) -> bool: #Fix the time and day
+        return (
+            datetime(2026, 2, 28, tzinfo=timezone.utc) <= dt <= datetime(2026, 5, 26, tzinfo=timezone.utc) #88 days shutdown
+            or
+            datetime(2026, 1, 8, tzinfo=timezone.utc) <= dt <= datetime(2026, 1, 30, tzinfo=timezone.utc)#23 days shutdown
+        )
