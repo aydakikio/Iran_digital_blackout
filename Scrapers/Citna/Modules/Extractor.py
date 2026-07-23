@@ -105,7 +105,7 @@ class Extractor :
                     comment.news_uuid = news_uuid
                     comment.depth = depth
                     comment.parent_comment_id = parent_comment_id
-                    comment.parent_uuid = comment_map.get(parent_comment_id) if parent_comment_id else None
+                    comment.parent_comment_uuid = comment_map.get(parent_comment_id) if parent_comment_id else None
 
                     # Getting Author
                     comment.author = child_tag.find('div', class_=['field--name-comment-title']).get_text(strip=True)
@@ -154,7 +154,7 @@ class Extractor :
         raise ValueError(f"Unrecognized datetime format: '{datetime_string}'")
 
     @staticmethod
-    def in_range(dt: datetime) -> bool: #Fix the time and day
+    def in_range(dt: datetime) -> bool:
         return (
             datetime(2026, 2, 28, tzinfo=timezone.utc) <= dt <= datetime(2026, 5, 26, tzinfo=timezone.utc) #88 days shutdown
             or

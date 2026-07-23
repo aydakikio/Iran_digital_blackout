@@ -10,8 +10,8 @@ class Comment:
     depth:int = 0
     comment_id:str = None
     news_uuid:str = None
-    replied_comment:str = None
     parent_comment_id: str = None
+    parent_comment_uuid: str = None
 
 
     published_time: datetime = field(default_factory=datetime.now)
