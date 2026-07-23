@@ -16,6 +16,7 @@ from botasaurus.soupify import soupify
 from bs4 import BeautifulSoup
 from collections import deque
 import datetime
+import uuid
 
 current_news_page:int = 0
 
@@ -33,7 +34,7 @@ def citna_scraper(driver:Driver, data=None) -> int:
     driver.enable_human_mode()
     bypass_if_detected(driver)
 
-    """ 
+    """
     driver.get(f'https://www.citna.ir/taxonomy/term/58250?page={current_news_page}',bypass_cloudflare=True)
     driver.long_random_sleep()
 
@@ -41,14 +42,16 @@ def citna_scraper(driver:Driver, data=None) -> int:
 
     Extractor.extract_news_link(pagination_webpage_content,pending_news)
     """
-    driver.get(f'https://www.citna.ir/news/336367/%D8%A2%D9%85%D8%A7%D8%AF%DA%AF%DB%8C-%D8%B2%DB%8C%D8%B1%D8%B3%D8%A7%D8%AE%D8%AA-%D9%87%D8%A7%DB%8C-%D8%B4%D8%A8%DA%A9%D9%87-%D8%B5%D9%88%D8%B1%D8%AA-%D8%A7%D8%AA%D8%B5%D8%A7%D9%84-%D9%86%D8%A7%DA%AF%D9%87%D8%A7%D9%86%DB%8C-%D8%A7%DB%8C%D9%86%D8%AA%D8%B1%D9%86%D8%AA',bypass_cloudflare=True)
+    driver.get(f'https://www.citna.ir/news/335818/%D9%82%D9%88%D9%84-%D9%88%D8%B2%DB%8C%D8%B1-%D8%B9%D9%84%D9%88%D9%85-%D8%AF%D8%B3%D8%AA%D8%B1%D8%B3%DB%8C-%D8%AC%D8%A7%D9%85%D8%B9%D9%87-%D8%B9%D9%84%D9%85%DB%8C-%DA%A9%D8%B4%D9%88%D8%B1-%D8%A7%DB%8C%D9%86%D8%AA%D8%B1%D9%86%D8%AA-%D8%A8%DB%8C%D9%86-%D8%A7%D9%84%D9%85%D9%84%D9%84%DB%8C',bypass_cloudflare=True)
     driver.long_random_sleep()
 
     news_webpage_content: BeautifulSoup = soupify(driver)
 
-    news:News = News()
-    Extractor.extract_news(news_webpage_content,news)
+    #news:News = News()
+    #Extractor.extract_news(news_webpage_content,news)
 
+    sample_uuid :str = str(uuid.uuid4())
+    Extractor.extract_comments(news_webpage_content,sample_uuid)
 
 
     return 0
