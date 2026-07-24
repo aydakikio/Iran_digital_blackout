@@ -45,7 +45,7 @@ class Extractor :
                 logger.info('News is out of range')
 
     @staticmethod
-    def extract_news(html_content:BeautifulSoup, news:News) -> None:
+    def extract_news(html_content:BeautifulSoup, news:News,database_manager:Database_Manager) -> None:
 
         #Getting news code
         news.news_code= html_content.find('span', class_='nid').get_text(strip=True).replace("کد خبر: ", "")
@@ -73,13 +73,13 @@ class Extractor :
         news.likes = int(like_wrapper.find('span').get_text(strip=True)[1:-1])
 
         # Save into database
-        Database_Manager.save_news(news)
+        Database_Manager.save_news(database_manager,news)
 
         #Extract the comments
-        Extractor.extract_comments(html_content, news.news_uuid)
+        Extractor.extract_comments(html_content, news.news_uuid,database_manager)
 
     @staticmethod
-    def extract_comments(html_content: BeautifulSoup, news_uuid: str) -> None:
+    def extract_comments(html_content: BeautifulSoup, news_uuid: str , database_manager) -> None:
         comment_wrapper: Tag = html_content.find('section', class_=["comment-wrapper"])
 
         comment_map: dict[str, str] = {}
@@ -131,7 +131,7 @@ class Extractor :
                     last_comment_id = comment.comment_id
 
                     # Save into the database
-                    Database_Manager.save_comment(comment)
+                    Database_Manager.save_comment(database_manager,comment)
 
                 elif 'indented' in classes:
                     queue.append((child_tag, last_comment_id, depth + 1))

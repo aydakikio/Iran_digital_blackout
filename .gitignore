@@ -224,3 +224,4 @@ Scrapers/Offline_Iran/.env
 /Scrapers/Citna/error_logs/
 /Scrapers/Citna/output
 
+**/.env
