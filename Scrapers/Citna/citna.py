@@ -15,8 +15,6 @@ from botasaurus_driver.solve_cloudflare_captcha import bypass_if_detected
 from botasaurus.soupify import soupify
 from bs4 import BeautifulSoup
 from collections import deque
-import datetime
-import uuid
 
 current_news_page:int = 0
 
