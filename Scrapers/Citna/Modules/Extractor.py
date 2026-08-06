@@ -75,9 +75,6 @@ class Extractor :
         # Save into database
         Database_Manager.save_news(database_manager,news)
 
-        #Extract the comments
-        Extractor.extract_comments(html_content, news.news_uuid,database_manager)
-
     @staticmethod
     def extract_comments(html_content: BeautifulSoup, news_uuid: str , database_manager) -> None:
         comment_wrapper: Tag = html_content.find('section', class_=["comment-wrapper"])
@@ -157,6 +154,7 @@ class Extractor :
     def in_range(dt: datetime) -> bool:
         return (
             datetime(2026, 2, 28, tzinfo=timezone.utc) <= dt <= datetime(2026, 5, 26, tzinfo=timezone.utc) #88 days shutdown
-            or
-            datetime(2026, 1, 8, tzinfo=timezone.utc) <= dt <= datetime(2026, 1, 30, tzinfo=timezone.utc)#23 days shutdown
+
+            #or -> For session 2
+            #datetime(2026, 1, 8, tzinfo=timezone.utc) <= dt <= datetime(2026, 1, 30, tzinfo=timezone.utc)#23 days shutdown
         )

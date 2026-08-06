@@ -34,13 +34,14 @@ class Database_Manager:
             logger.error(f'Error in creating root node: {error}')
             raise ValueError(f'Failed to create root node: {error}') from error
 
-    def save_news(self,news:News):
+    def save_news(self, news: News):
         try:
             with self.driver.session() as session:
                 session.run("""
-                    Merge (root:Category {uuid:$root_uuid})
-                    MERGE (news:News {uuid: $uuid})
-                    
+                    MERGE (root:Category {uuid:$root_uuid})
+
+                    MERGE (news:News {uuid:$uuid})
+
                     SET news.title = $title,
                         news.url = $url,
                         news.news_code = $news_code,
@@ -49,22 +50,22 @@ class Database_Manager:
                         news.description = $description,
                         news.body = $body,
                         news.tags = $tags,
-                        news.published_time = $published_time     
-                                   
-                    MERGE (news) -[BELONGS_TO]-> (root)
+                        news.published_time = $published_time
+
+                    MERGE (news)-[:BELONGS_TO]->(root)
                     """,
-                    root_uuid=self.root_uuid,
-                    uuid=news.news_uuid,
-                    title=news.title,
-                    url=news.url,
-                    news_code=news.news_code,
-                    reporter=news.reporter,
-                    likes=news.likes,
-                    description=news.description,
-                    body=news.body,
-                    tags=news.tags,
-                    published_time=news.published_time.isoformat()
-                )
+                            root_uuid=self.root_uuid,
+                            uuid=news.news_uuid,
+                            title=news.title,
+                            url=news.url,
+                            news_code=news.news_code,
+                            reporter=news.reporter,
+                            likes=news.likes,
+                            description=news.description,
+                            body=news.body,
+                            tags=news.tags,
+                            published_time=news.published_time.isoformat()
+                            )
 
                 logger.info(f'The news {news.news_code} successfully inserted')
 
@@ -75,33 +76,50 @@ class Database_Manager:
     def save_comment(self, comment: Comment):
         try:
             with self.driver.session() as session:
+
                 session.run("""
-                    MATCH (news:News {uuid: $news_uuid})
-                    MERGE (comment:Comment {uuid: $uuid})
+                    MATCH (news:News {uuid:$news_uuid})
+
+                    MERGE (comment:Comment {uuid:$uuid})
+
                     SET comment.body = $body,
                         comment.author = $author,
                         comment.likes = $likes,
                         comment.depth = $depth,
                         comment.comment_id = $comment_id,
                         comment.published_time = $published_time
+
                     MERGE (comment)-[:BELONGS_TO]->(news)
+
                     WITH comment
-                    CALL {
-                        WITH comment
-                        MATCH (parent:Comment {uuid: $parent_comment_uuid})
-                        MERGE (comment)-[:REPLY_TO]->(parent)
-                    }
+                    OPTIONAL MATCH (parent:Comment {uuid:$parent_comment_uuid})
+
+                    FOREACH (_ IN CASE 
+                        WHEN parent IS NOT NULL THEN [1]
+                        ELSE []
+                    END |
+                        MERGE (comment)-[:REPLIES_TO]->(parent)
+                    )
                     """,
-                    uuid=comment.comment_uuid,
-                    news_uuid=comment.news_uuid,
-                    body=comment.body,
-                    author=comment.author,
-                    likes=comment.likes,
-                    depth=comment.depth,
-                    comment_id=comment.comment_id,
-                    published_time=comment.published_time.isoformat(),
-                    parent_comment_uuid=comment.parent_comment_uuid
-            )
+                            uuid=comment.comment_uuid,
+                            news_uuid=comment.news_uuid,
+                            body=comment.body,
+                            author=comment.author,
+                            likes=comment.likes,
+                            depth=comment.depth,
+                            comment_id=comment.comment_id,
+                            published_time=comment.published_time.isoformat(),
+                            parent_comment_uuid=comment.parent_comment_uuid
+                            )
+
+                logger.info(
+                    f'Comment {comment.comment_id} successfully inserted'
+                )
+
         except Exception as error:
-            logger.error(f'Error saving comment {comment.comment_id}: {error}')
-            raise ValueError(f'Failed to save comment: {error}') from error
+            logger.error(
+                f'Error saving comment {comment.comment_id}: {error}'
+            )
+            raise ValueError(
+                f'Failed to save comment: {error}'
+            ) from error
