@@ -57,7 +57,7 @@ class Extractor :
         news.description = html_content.find('div' , class_='field--name-field-lead').get_text()
 
         #news body
-        news.body = html_content.find('div' , class_=['field--type-text-with-summary','field--label-visually_hidden']).get_text().replace('متن خبر' ,'').replace('انتهای پیام','')
+        news.body = html_content.find('div' , class_='clearfix text-formatted field field--name-body field--type-text-with-summary field--label-visually_hidden').get_text().replace('متن خبر' ,'').replace('انتهای پیام','')
 
         #news tags links field__items
         news_tag_container = html_content.find('ul' , class_='links field__items')

@@ -27,9 +27,8 @@ pending_news:deque[News] = deque()
 # 88 day shutdown -> start-> Feb 28 2026 | end -> May 22 2026
 # 23 day shutdown -> start -> Jan 8 2026 | end -> Feb 2 2026
 
-@browser(cache=False, reuse_driver=True,headless=False,wait_for_complete_page_load=True)
+@browser(cache=False, reuse_driver=True,headless=True,wait_for_complete_page_load=True)
 def citna_scraper(driver:Driver, data=None) -> int:
-    global current_news_page
     global pending_news
 
     #Create the base node
