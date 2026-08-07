@@ -40,12 +40,11 @@ def citna_scraper(driver:Driver, data=None) -> int:
 
 
     Database_Manager.create_category_node(database_manager,"Internet")
-    #Take Screenshots from neo4j
 
     driver.enable_human_mode()
     bypass_if_detected(driver)
 
-    driver.get(f'https://www.citna.ir/taxonomy/term/58250?page=0', bypass_cloudflare=True)
+    driver.get(f'https://www.citna.ir/taxonomy/term/56877?q=taxonomy/term/56877&page=0', bypass_cloudflare=True)
     driver.long_random_sleep()
 
     pagination_tab=driver._browser.tabs[0]
