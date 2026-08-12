@@ -13,15 +13,20 @@ class Extractor:
     def __init__(self):
         self.captured_news_ids = []
         self.captured_comment_ids = []
+        self.captured_user_ids = []
     
     #Network Traffic listeners
     def listen_navigation_page(self, driver:Driver):
         self.clear_news_ids()
         driver.after_response_received(self._navigation_page_handler())
 
-    def listen_comments(self, driver):
+    def listen_comments(self, driver:Driver):
         self.clear_comment_ids()
         driver.after_response_received(self._comment_handler())
+
+    def listen_users(self, driver:Driver):
+        self.clear_user_ids()
+        driver.after_response_received(self._user_handler())
 
     def _navigation_page_handler(self):
         def after_response_handler(request_id, response:cdp.network.Response, event:cdp.network.ResponseReceived):
@@ -34,7 +39,7 @@ class Extractor:
         return after_response_handler
 
     def _comment_handler(self):
-        def handler(request_id, response:cdp.network.Response, event:cdp.network.ResponseReceived):
+        def after_response_handler(request_id, response:cdp.network.Response, event:cdp.network.ResponseReceived):
             if response.mime_type != "application/json":
                 return
             if "feedbacks" not in response.url:
@@ -46,11 +51,22 @@ class Extractor:
             logger.info(f"✅ Comment captured: {response.url}")
             self.captured_comment_ids.append(event.request_id)
 
-        return handler
+        return after_response_handler
 
-    def extract_navigation_articles_datetime(self, driver:Driver,pending_news:deque):
+    def _user_handler(self):
+        def after_response_handler(request_id, response:cdp.network.Response, event:cdp.network.ResponseReceived):
+            if "profile/user-profiles" not in response.url:
+                return
+            if response.status != 200:
+                return
+
+            logger.info(f"✅ Captured: {response.url}")
+            self.captured_user_ids.append(event.request_id)
+        return after_response_handler
+
+    def extract_article_urls(self, driver:Driver,pending_news:deque):
         if not self.captured_news_ids:
-            logger.error("❌ No responses captured")
+            logger.error("❌ No news captured")
             return []
         body = driver.run_cdp_command(
             cdp.network.get_response_body(self.captured_news_ids[-1])
@@ -87,13 +103,29 @@ class Extractor:
 
         # Doing things on comment_datas
 
+    def extract_users(self,driver):
+        if not self.captured_user_ids:
+            logger.error("❌ No user captured")
+            return []
+        body = driver.run_cdp_command(
+            cdp.network.get_response_body(self.captured_user_ids[-1])
+        )
+
+        data = json.loads(body[0])
+        self.clear_comment_ids()
+
+        # Doing things on comment_datas
+
+    #Listener parameter cleaners
     def clear_news_ids(self):
         self.captured_news_ids.clear()
 
     def clear_comment_ids(self):
         self.captured_comment_ids.clear()
-        
-    
+
+    def clear_user_ids(self):
+        self.captured_user_ids.clear()
+
     @staticmethod
     def in_range(dt: datetime | str) -> bool:
         if isinstance(dt, str):
