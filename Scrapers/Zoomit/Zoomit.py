@@ -18,12 +18,14 @@ from loguru import logger
 
 #Models
 from Models.news_data import News
+from Models.user_data import Users
 
 #Modules
 from Modules.Extractor import Extractor
 
 #global variables
 pending_news:deque[News] = deque()
+pending_users:deque[Users]
 
 @browser(cache=False, reuse_driver=True,headless=False,wait_for_complete_page_load=True)
 def zoomit_scraper(driver:Driver, data=None) -> int:
@@ -38,12 +40,14 @@ def zoomit_scraper(driver:Driver, data=None) -> int:
     #init Extractor
     extractor:Extractor = Extractor()
     extractor.listen_navigation_page(driver)
+    extractor.listen_comments(driver)
     logger.info("⚓ Listener hooks successfully inserted")
 
-    driver.get("https://www.zoomit.ir/archive?groupings=32319&sort=Newest&publishDate=All&readingTime=All&pageNumber=2", bypass_cloudflare=True)
+    #driver.get("https://www.zoomit.ir/archive?groupings=32319&sort=Newest&publishDate=All&readingTime=All&pageNumber=2", bypass_cloudflare=True)
+    driver.get("https://www.zoomit.ir/tech-iran/408325-irancell-call-forwarding/", bypass_cloudflare=True)
     driver.long_random_sleep()
 
-    extractor.extract_navigation_articles_datetime(driver,pending_news)
+    #extractor.extract_navigation_articles_datetime(driver,pending_news)
 
     return 0
 
