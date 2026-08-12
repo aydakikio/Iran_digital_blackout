@@ -57,7 +57,7 @@ def citna_scraper(driver:Driver, data=None) -> int:
 
             #Check to see if it is finished
             if news.published_time < datetime(2026, 2, 28, tzinfo=timezone.utc):
-                logger.info("The session is finished successfully")
+                logger.info("The session finished successfully")
 
                 database_manager.close()
                 return 0
