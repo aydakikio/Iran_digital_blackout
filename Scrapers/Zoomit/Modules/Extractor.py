@@ -64,6 +64,28 @@ class Extractor:
             self.captured_user_ids.append(event.request_id)
         return after_response_handler
 
+    #Listener parameter cleaners
+    def clear_news_ids(self):
+        self.captured_news_ids.clear()
+
+    def clear_comment_ids(self):
+        self.captured_comment_ids.clear()
+
+    def clear_user_ids(self):
+        self.captured_user_ids.clear()
+
+    #Datetime Helper
+    @staticmethod
+    def in_range(dt: datetime | str) -> bool:
+        if isinstance(dt, str):
+            dt = datetime.fromisoformat(dt.replace("Z", "+00:00"))
+        return (
+            datetime(2026, 2, 28, tzinfo=timezone.utc) <= dt <= datetime(2026, 5, 26, tzinfo=timezone.utc)
+            # or -> For session 2
+            # datetime(2026, 1, 8, tzinfo=timezone.utc) <= dt <= datetime(2026, 1, 30, tzinfo=timezone.utc)
+        )
+
+    #Extractors
     def extract_article_urls(self, driver:Driver,pending_news:deque):
         if not self.captured_news_ids:
             logger.error("❌ No news captured")
@@ -115,23 +137,3 @@ class Extractor:
         self.clear_comment_ids()
 
         # Doing things on comment_datas
-
-    #Listener parameter cleaners
-    def clear_news_ids(self):
-        self.captured_news_ids.clear()
-
-    def clear_comment_ids(self):
-        self.captured_comment_ids.clear()
-
-    def clear_user_ids(self):
-        self.captured_user_ids.clear()
-
-    @staticmethod
-    def in_range(dt: datetime | str) -> bool:
-        if isinstance(dt, str):
-            dt = datetime.fromisoformat(dt.replace("Z", "+00:00"))
-        return (
-            datetime(2026, 2, 28, tzinfo=timezone.utc) <= dt <= datetime(2026, 5, 26, tzinfo=timezone.utc)
-            # or -> For session 2
-            # datetime(2026, 1, 8, tzinfo=timezone.utc) <= dt <= datetime(2026, 1, 30, tzinfo=timezone.utc)
-        )

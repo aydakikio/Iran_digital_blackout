@@ -25,11 +25,12 @@ from Modules.Extractor import Extractor
 
 #global variables
 pending_news:deque[News] = deque()
-pending_users:deque[Users]
+pending_users:deque[Users] = deque()
 
 @browser(cache=False, reuse_driver=True,headless=False,wait_for_complete_page_load=True)
 def zoomit_scraper(driver:Driver, data=None) -> int:
     global pending_news
+    global pending_users
 
     driver.enable_human_mode()
     driver.detect_and_bypass_cloudflare()
@@ -41,6 +42,7 @@ def zoomit_scraper(driver:Driver, data=None) -> int:
     extractor:Extractor = Extractor()
     extractor.listen_navigation_page(driver)
     extractor.listen_comments(driver)
+    extractor.listen_users(driver)
     logger.info("⚓ Listener hooks successfully inserted")
 
     #driver.get("https://www.zoomit.ir/archive?groupings=32319&sort=Newest&publishDate=All&readingTime=All&pageNumber=2", bypass_cloudflare=True)
